@@ -6,7 +6,7 @@ describe('PorteurService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: PorteurService = TestBed.get(PorteurService);
+    const service: PorteurService = TestBed.inject(PorteurService);
     expect(service).toBeTruthy();
   });
 });

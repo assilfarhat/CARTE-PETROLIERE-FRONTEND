@@ -6,7 +6,7 @@ describe('TerminalService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: TerminalService = TestBed.get(TerminalService);
+    const service: TerminalService = TestBed.inject(TerminalService);
     expect(service).toBeTruthy();
   });
 });

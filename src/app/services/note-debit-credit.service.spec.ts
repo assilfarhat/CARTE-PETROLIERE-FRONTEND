@@ -6,7 +6,7 @@ describe('NoteDebitCreditService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: NoteDebitCreditService = TestBed.get(NoteDebitCreditService);
+    const service: NoteDebitCreditService = TestBed.inject(NoteDebitCreditService);
     expect(service).toBeTruthy();
   });
 });

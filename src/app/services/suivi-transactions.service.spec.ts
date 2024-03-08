@@ -6,7 +6,7 @@ describe('SuiviTransactionsService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SuiviTransactionsService = TestBed.get(SuiviTransactionsService);
+    const service: SuiviTransactionsService = TestBed.inject(SuiviTransactionsService);
     expect(service).toBeTruthy();
   });
 });
