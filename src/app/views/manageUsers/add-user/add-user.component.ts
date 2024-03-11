@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { User, TokenService } from 'app/services/token.service';
 import { UserService } from 'app/services/user.service';
-import { ToasterService } from 'angular2-toaster/src/toaster.service';
+import { ToasterService } from 'angular2-toaster';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { requiredBy } from 'app/compare';
 import { StationsService } from 'app/services/stations.service';
@@ -235,7 +235,7 @@ export class AddUserComponent implements OnInit {
     if (this.form.valid) {
       this.isLoading = !this.isLoading;
       let userToAdd = this.form.value;
-      //console.log("useeer",userToAdd)
+      console.log("useeer",userToAdd)
       userToAdd.OrganizationsId = [];
 
       if (this.form.get('role').value != 'MERCHANT' && this.form.get('role').value != 'MAGASIN') {
@@ -268,7 +268,7 @@ export class AddUserComponent implements OnInit {
           this.isLoading = !this.isLoading;
           this.hasError = true;
           this.errorMessage = err.error.value;
-         //console.log(this.errorMessage);
+          console.log(this.errorMessage);
         }
 
       )
