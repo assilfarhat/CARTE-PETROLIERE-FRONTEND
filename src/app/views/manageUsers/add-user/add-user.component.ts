@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { User, TokenService } from 'app/services/token.service';
 import { UserService } from 'app/services/user.service';
 import { ToasterService } from 'angular2-toaster';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { requiredBy } from 'app/compare';
 import { StationsService } from 'app/services/stations.service';
 import { ClientService } from 'app/services/client.service';
 
