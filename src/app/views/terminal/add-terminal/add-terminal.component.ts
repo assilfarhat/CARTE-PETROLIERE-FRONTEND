@@ -32,7 +32,6 @@ export class AddTerminalComponent implements OnInit {
     private fb: FormBuilder,
     private toasterService: ToasterService,
     private router: Router,
-    private affilService:AffilieService,
     private stationsService:StationsService,
     private terminalService:TerminalService ,
     private tpeService:TpeService
@@ -43,55 +42,69 @@ export class AddTerminalComponent implements OnInit {
   stations: any = [];
   filtredStation: any;
   editMode = false;
-  model = {}
-  ngOnInit() {
-    if (this.route.snapshot.paramMap.get('id'))
-      // edit
-      this.editMode = true;
-      else 
-      // add
-      this.editMode = false;
+  model = {
+    idTerminal: '', // Ensure this matches the property names used in your form controls
+    idAffilie: '',
+    idStation: '',
+    serialNumber: '',
+    idBancaire: '',
+    etatTerminal: '',
+    dateCreation: '',
+    confVersion: '',
+    binaryVersion: '',
+    withBalance: '',
+    batchNumber: '',
+    sequenceNumber: '',
+    datePremiereOp: '',
+    designation: '',
+    codeResponsable: '',
+    statutReservation: '',
+    telephone: '',
+    dateStatutReservation: ''
+  };
+  
+ ngOnInit() {
+  // Check if editing mode or adding mode
+  if (this.route.snapshot.paramMap.get('id')) {
+    // edit
+    this.editMode = true;
+    this.getTerminalById(this.route.snapshot.paramMap.get('id'));
+  } else {
+    // add
+    this.editMode = false;
+    this.createform(this.model);
+  }
 
-      this.form = this.fb.group({
-      IdTerminal : new FormControl({value:"", disabled: this.editMode}, [ Validators.required, Validators.maxLength(12)]) ,
-      
-      IdAffilie : new FormControl({value:""}),
-      IdStation :new FormControl({value:""},Validators.required),//[model.idStation, Validators.required],
-      SerialNumber : new FormControl({value:""},Validators.required),//[ model.serialNumber,Validators.required],
-      IdBancaire : new FormControl({value:""}),
-      EtatTerminal : new FormControl({value:""}),
-      DateCreation : new FormControl({value:""}),
-      ConfVersion : new FormControl({value:""}),
-      BinaryVersion : new FormControl({value:""}),
-      WithBalance : new FormControl({value:""}),
-      BatchNumber : new FormControl({value:""}),
-      SequenceNumber : new FormControl({value:""}),
-      DatePremiereOp : new FormControl({value:""}),
-      Designation : new FormControl({value:""}, [ Validators.required, Validators.maxLength(16)]) ,
-      CodeResponsable : new FormControl({value:""}),
-      StatutReservation : new FormControl({value:""}),
-      telephone: new FormControl({value:"", disabled: this.editMode}),
-      DateStatutReservation : new FormControl({value:""}),
+  // Initialize form controls
+  this.form = this.fb.group({
+    IdTerminal: new FormControl("", [Validators.required, Validators.maxLength(12)]),
+    IdAffilie: new FormControl(""),
+    IdStation: new FormControl("", Validators.required),
+    SerialNumber: new FormControl("", Validators.required),
+    IdBancaire: new FormControl(""),
+    EtatTerminal: new FormControl(""),
+    DateCreation: new FormControl(""),
+    ConfVersion: new FormControl(""),
+    BinaryVersion: new FormControl(""),
+    WithBalance: new FormControl(""),
+    BatchNumber: new FormControl(""),
+    SequenceNumber: new FormControl(""),
+    DatePremiereOp: new FormControl(""),
+    Designation: new FormControl("", [Validators.required, Validators.maxLength(16)]),
+    CodeResponsable: new FormControl(""),
+    StatutReservation: new FormControl(""),
+    telephone: new FormControl(""),
+    DateStatutReservation: new FormControl("")
+  });
 
-    })
-    this.getStation();
-    if (this.route.snapshot.paramMap.get('id')) {
-      // edit
-      this.editMode = true;
-      this.getTerminalById(this.route.snapshot.paramMap.get('id'))
+  // Disable specific form controls based on editMode
+  if (this.editMode) {
+    this.form.get('IdTerminal').disable();
+    this.form.get('telephone').disable();
+  }
 
-    } else {
-
-      // add
-      this.editMode = false;
-
-      this.createform(this.model);
-    }
-
-
-    // this.getAffils();
-    //  this. getTpes();
-  }// end ngOnInit
+  this.getStation();
+}
 
 
 
