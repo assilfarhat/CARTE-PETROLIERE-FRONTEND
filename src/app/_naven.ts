@@ -5,6 +5,11 @@ export const navigationEn = [
     icon: 'icon-speedometer',
   },
   {
+    name: 'Dashboard',
+    url: '/dashboard',
+    icon: 'icon-speedometer',
+  },
+  {
     name : 'Management Of Users',
     url: '',
     icon: 'fa fa-users',

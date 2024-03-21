@@ -12,7 +12,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Subject } from 'rxjs';
 import { CompareAmounts, CompareDates, } from 'app/shared/Validators';
 import { TokenService } from 'app/services/token.service';
-import { Console } from 'console';
+import { Console, log } from 'console';
 
 interface AccessView {
   idUser: string;
@@ -135,6 +135,7 @@ export class CarteListComponent implements OnInit {
     this.accessView = this.tokenService.getAccess();
   
       this.access = JSON.parse(this.accessView).filter(item => item.idAccessView === 'Carte');
+      console.log("this.access",this.access)
       this.activationCarte = this.access[0].action
       this.accessActivationCarte = this.access[0].valueAccessView
       this.ajout = this.access[1].action

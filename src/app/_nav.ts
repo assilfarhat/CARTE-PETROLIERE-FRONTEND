@@ -11,6 +11,15 @@ export const navigation = [
   },
   {
 
+    name: 'Dashboard',
+
+    url: '/dashboard',
+
+    icon: 'fa fa-home',
+
+  },
+  {
+
     name: "Gestion d'accès",
     url: '/manage-access',
 

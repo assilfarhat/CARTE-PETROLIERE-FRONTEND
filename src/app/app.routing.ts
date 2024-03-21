@@ -56,6 +56,7 @@ import { EditPlafondPSComponent } from './views/Client/edit-plafond-ps/edit-plaf
 import { DemandePersComponent } from './views/demande-pers/demande-pers.component';
 import { HistoriqueClientComponent } from './views/historique-client/historique-client.component';
 import { SoldeDepartComponent } from './views/Solde-depart/solde-depart/solde-depart.component';
+import { DashboardComponent } from './views/Dashboard/dashboard/dashboard.component';
 
 
 
@@ -112,7 +113,8 @@ export const routes: Routes = [
         title: 'accueil'
       },*/
     children: [
-
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardGuard] },
+    
       {
         path: 'home',
         component: HomeComponent,

@@ -160,6 +160,8 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { translateMsgPipe } from './pipes/translate-msg.pipe';
 import {MatTreeModule} from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { DashboardComponent } from './views/Dashboard/dashboard/dashboard.component';
 //import { PorteurDetailsComponent } from './views/porteur/porteur-details/porteur-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -197,7 +199,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         MatTreeModule,
         MatButtonModule,
         MatIconModule,
-        CdkTreeModule
+        CdkTreeModule,
+        MatGridListModule
     ],
     declarations: [
         AppComponent,
@@ -209,6 +212,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         UpdateProfileComponent,
         AddTerminalComponent,
         ListTerminalComponent,
+        DashboardComponent,
         AddUserComponent,
         CarteDetailsComponent,
         EditPlafondPSComponent,

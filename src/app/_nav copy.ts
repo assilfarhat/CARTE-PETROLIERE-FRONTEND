@@ -9,6 +9,15 @@ export const navigation = [
     icon: 'icon-speedometer',
 
   },
+  {
+
+    name: 'Dashboard',
+
+    url: '/dashboard',
+
+    icon: 'icon-speedometer',
+
+  },
   // {
 
   //   name: 'Gestion d acces',
