@@ -157,7 +157,9 @@ export class CarteListComponent implements OnInit {
       this.modifCarte = this.access[9].action
       this.accessModifCarte = this.access[9].valueAccessView
       this.rechargeCarte = this.access[10].action
+      console.log(" this.rechargeCarte ", this.rechargeCarte )
       this.accessrechargeCarte = this.access[10].valueAccessView
+      console.log(" this.accessrechargeCarte ", this.accessrechargeCarte )
       this.replaceCarte = this.access[11].action
       this.accessReplaceCarte = this.access[11].valueAccessView
       this.renouvelerCarte = this.access[12].action
@@ -520,7 +522,7 @@ export class CarteListComponent implements OnInit {
 
        this.carteService.List(search)
         .subscribe((resp: any) => {
-          //console.log("resp: " ,resp)
+          console.log("resp: " ,resp)
           this.carteList = resp as []
           this.dtTrigger.next();
           this.isLoading = false;

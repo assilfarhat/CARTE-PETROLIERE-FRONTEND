@@ -5,57 +5,42 @@
         </div>
         <div class="card-body">
             <form class="form-horizontal" [formGroup]="form">
-
                 <div class="form-group row" style="margin-top: 10px;">
-                    <div class="col-xl-3 col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Date début</mat-label>
-                            <input matInput formControlName="dateDebut" type="date">
-                            <mat-error>la Date début doit être inférieur ou égale à la date fin </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Date fin</mat-label>
-                            <input matInput formControlName="dateFin" type="date">
-                        </mat-form-field>
-                    </div>
-                    <!-- <div class="col-xl-3 col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Date Fin</mat-label>
-                            <input matInput formControlName="dateFin" type="date">
-                            <mat-error>la Date fin doit être supérieur ou égale à la date début </mat-error>
-                        </mat-form-field>
-                    </div> -->
-                    <!-- <div class="col-xl-3 col-md-6">
-                        <mat-form-field appearance="outline">
-                            <mat-label>Référence</mat-label>
-                            <input type="text" matInput formControlName="reference" placeholder="référence">
-                        </mat-form-field>&nbsp;
-                    </div> -->
-                    <div class="col-xl-3 col-md-6" >
-                        <mat-form-field appearance="outline">
-                            <mat-label>Code</mat-label>
-                            <input type="text" matInput formControlName="code" placeholder="code">
-                        </mat-form-field>&nbsp;
-                    </div>
-
-                    <div class="col-xl-3 col-md-6" *ngIf=" ActualUser != 'GERANT'">
-                        <input class="form-control" list="Station" placeholder="{{'Station'}}"
-                            formControlName="IdStation">
-                        <datalist id="Station">
-                            <option *ngFor="let item of StationList" [value]="item.stationName">{{ item.stationName }}
-                            </option>
-                        </datalist>
-                    </div>
-
-                    <div class="col-md-12 text-right">
-                        <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="rerender()">
-                            <i class="fa fa-search"> Chercher </i>
-                        </button>
-                    </div>
+                   <div class="col-xl-3 col-md-6">
+                     <label for="dateDebut">Date début</label>
+                     <div style="text-align:center;">
+                       <input class="form-control" type="date" formControlName="dateDebut" id="dateDebut">
+                     </div>
+                   </div>
+                   <div class="col-xl-3 col-md-6">
+                     <label for="dateFin">Date fin</label>
+                     <div style="text-align:center;">
+                       <input class="form-control" type="date" formControlName="dateFin" id="dateFin">
+                     </div>
+                   </div>
+                   <div class="col-xl-3 col-md-6">
+                     <label for="code">Code</label>
+                     <div style="text-align:center;">
+                       <input class="form-control" type="text" formControlName="code" id="code" placeholder="code">
+                     </div>
+                   </div>
+                   <div class="col-xl-3 col-md-6" *ngIf="ActualUser != 'GERANT'">
+                     <label for="IdStation">Station</label>
+                     <div style="text-align:center;">
+                       <input class="form-control" list="Station" placeholder="{{'Station'}}" formControlName="IdStation" id="IdStation">
+                       <datalist id="Station">
+                         <option *ngFor="let item of StationList" [value]="item.stationName">{{ item.stationName }}</option>
+                       </datalist>
+                     </div>
+                   </div>
                 </div>
-            </form>
+                <div class="col-md-12 text-right">
+                   <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="rerender()">
+                     <i class="fa fa-search"> Chercher </i>
+                   </button>
+                </div>
+               </form>
+               
             <div style="overflow-x:auto;">
                 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover display nowrap"
                     width="100%">

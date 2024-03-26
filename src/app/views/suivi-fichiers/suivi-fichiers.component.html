@@ -6,88 +6,53 @@
     <div class="card-body">
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-group row" style="margin-top: 10px;">
-          <div class="col-xl-3 col-md-6">
-            <!-- <mat-form-field appearance="outline">
-              <mat-label>Client</mat-label>
-              <mat-select formControlName="clientId">
-                <mat-option value=""> Tous </mat-option>
-                <mat-option *ngFor="let item of ClientList" [value]="item.idClient">
-                  {{item.raisonSociale}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field> -->
-            <div style="text-align:center;margin-top: 10px;">
-              <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId">
-
-              <datalist id="Client">
-
-                <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }} </option>
-              </datalist>
-
-            </div>
-          </div>
-
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date début</mat-label>
-              <input matInput formControlName="dateDebut" type="date">
-              <mat-error>la Date début doit être inférieur ou égale à la date fin </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date Fin</mat-label>
-              <input matInput formControlName="dateFin" type="date">
-              <mat-error>la Date fin doit être supérieur ou égale à la date début </mat-error>
-            </mat-form-field>
-          </div>
-          <!-- <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date début</mat-label>
-              <input matInput formControlName="dateDebut" [matDatepicker]="picker">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div> 
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date fin</mat-label>
-              <input matInput formControlName="dateFin" [matDatepicker]="pickerdateFin">
-              <mat-datepicker-toggle matSuffix [for]="pickerdateFin"></mat-datepicker-toggle>
-              <mat-datepicker #pickerdateFin></mat-datepicker>
-            </mat-form-field>
-          </div>-->
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Type ficher</mat-label>
-              <mat-select formControlName="typeFile">
-                <mat-option value=""> Tous </mat-option>
-                <mat-option value="Bon de Recharge"> Bon de Recharge </mat-option>
-                <mat-option value="Bon de Paiement"> Bon de Paiement </mat-option>
-                <mat-option value="etat de Rechargement"> Etat de Rechargement </mat-option>
-                <mat-option value="Paiement facture postpayé"> Paiement facture postpayé </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <!-- <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Numéro fichier</mat-label>
-              <input matInput formControlName="numBon" placeholder="Numéro Fichier">
-            </mat-form-field>
-          </div> -->
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Référence</mat-label>
-              <input matInput formControlName="reference" placeholder="Référence">
-            </mat-form-field>
-          </div>
-          <div class="col-md-12 text-right">
-            <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getlistRecharge()">
-              <i class="fa fa-search"> Chercher </i>
-            </button>
-          </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="clientId">Client</label>
+             
+               <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId" id="clientId">
+               <datalist id="Client">
+                 <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }}</option>
+               </datalist>
+             
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="dateDebut">Date début</label>
+             <div style="text-align:center;">
+               <input class="form-control" type="date" formControlName="dateDebut" id="dateDebut">
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="dateFin">Date Fin</label>
+             <div style="text-align:center;">
+               <input class="form-control" type="date" formControlName="dateFin" id="dateFin">
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="typeFile">Type ficher</label>
+             <div style="text-align:center;">
+               <select class="form-control" formControlName="typeFile" id="typeFile">
+                 <option value="">Tous</option>
+                 <option value="Bon de Recharge">Bon de Recharge</option>
+                 <option value="Bon de Paiement">Bon de Paiement</option>
+                 <option value="etat de Rechargement">Etat de Rechargement</option>
+                 <option value="Paiement facture postpayé">Paiement facture postpayé</option>
+               </select>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="reference">Référence</label>
+             <div style="text-align:center;">
+               <input class="form-control" type="text" formControlName="reference" id="reference" placeholder="Référence">
+             </div>
+           </div>
         </div>
-      </form>
+        <div class="col-md-12 text-right">
+           <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getlistRecharge()">
+             <i class="fa fa-search"> Chercher </i>
+           </button>
+        </div>
+       </form>
+       
       <div style="overflow-x:auto;">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover display nowrap"
           width="100%">

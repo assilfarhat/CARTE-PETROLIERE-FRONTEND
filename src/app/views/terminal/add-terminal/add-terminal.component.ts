@@ -63,76 +63,64 @@ export class AddTerminalComponent implements OnInit {
     dateStatutReservation: ''
   };
   
- ngOnInit() {
-  // Check if editing mode or adding mode
-  if (this.route.snapshot.paramMap.get('id')) {
-    // edit
-    this.editMode = true;
-    this.getTerminalById(this.route.snapshot.paramMap.get('id'));
-  } else {
-    // add
-    this.editMode = false;
-    this.createform(this.model);
-  }
+  ngOnInit() {
+    if (this.route.snapshot.paramMap.get('id')) {
+      this.editMode = true;
+      this.getTerminalById(this.route.snapshot.paramMap.get('id'));
+    } else {
+      this.editMode = false;
+      this.initializeForm();
+    }
 
-  // Initialize form controls
-  this.form = this.fb.group({
-    IdTerminal: new FormControl("", [Validators.required, Validators.maxLength(12)]),
-    IdAffilie: new FormControl(""),
-    IdStation: new FormControl("", Validators.required),
-    SerialNumber: new FormControl("", Validators.required),
-    IdBancaire: new FormControl(""),
-    EtatTerminal: new FormControl(""),
-    DateCreation: new FormControl(""),
-    ConfVersion: new FormControl(""),
-    BinaryVersion: new FormControl(""),
-    WithBalance: new FormControl(""),
-    BatchNumber: new FormControl(""),
-    SequenceNumber: new FormControl(""),
-    DatePremiereOp: new FormControl(""),
-    Designation: new FormControl("", [Validators.required, Validators.maxLength(16)]),
-    CodeResponsable: new FormControl(""),
-    StatutReservation: new FormControl(""),
-    telephone: new FormControl(""),
-    DateStatutReservation: new FormControl("")
-  });
+    this.getStation();
+ }
 
-  // Disable specific form controls based on editMode
-  if (this.editMode) {
-    this.form.get('IdTerminal').disable();
-    this.form.get('telephone').disable();
-  }
+ initializeForm() {
+    this.form = this.fb.group({
+      IdTerminal: new FormControl("", [Validators.required, Validators.maxLength(12)]),
+      IdAffilie: new FormControl(""),
+      IdStation: new FormControl("", Validators.required),
+      SerialNumber: new FormControl("", Validators.required),
+      IdBancaire: new FormControl(""),
+      EtatTerminal: new FormControl(""),
+      DateCreation: new FormControl(""),
+      ConfVersion: new FormControl(""),
+      BinaryVersion: new FormControl(""),
+      WithBalance: new FormControl(""),
+      BatchNumber: new FormControl(""),
+      SequenceNumber: new FormControl(""),
+      DatePremiereOp: new FormControl(""),
+      Designation: new FormControl("", [Validators.required, Validators.maxLength(16)]),
+      CodeResponsable: new FormControl(""),
+      StatutReservation: new FormControl(""),
+      telephone: new FormControl(""),
+      DateStatutReservation: new FormControl("")
+    });
 
-  this.getStation();
-}
+    if (this.editMode) {
+      this.form.get('IdTerminal').disable();
+      this.form.get('telephone').disable();
+    }
+ }
 
+ getTerminalById(id) {
+    this.terminalService.get(id).subscribe((resp: any) => {
+      this.createform(resp);
+    }, (err) => {
+      // Handle error
+    });
+ }
 
+ getStation() {
+    this.stationsService.List().subscribe((resp: any) => {
+      this.stations = resp;
+    }, (err) => {
+      // Handle error
+    });
+ }
 
-
-
-  getTerminalById(id){
-
-    this.terminalService.get(id).subscribe((resp:any) => {
-this.createform(resp)
-        },
-    (err) => {
-    
-  });
-  }
-
-
-  getStation(){
-    
-    this.stationsService.List().subscribe((resp:any) => {
-      this.stations=resp
-        },
-    (err) => {
-    
-  });
-  }
-
-  createform(model){
-    this.geTpeDisponibleByStation(model.idStation)
+ createform(model) {
+    this.geTpeDisponibleByStation(model.idStation);
     this.form.controls['IdTerminal'].setValue(model.idTerminal);
     this.form.controls['IdAffilie'].setValue(model.idAffilie);
     this.form.controls['IdStation'].setValue(model.idStation);
@@ -146,121 +134,21 @@ this.createform(resp)
     this.form.controls['BatchNumber'].setValue(model.batchNumber);
     this.form.controls['SequenceNumber'].setValue(model.sequenceNumber);
     this.form.controls['DatePremiereOp'].setValue(model.datePremiereOp);
-
     this.form.controls['Designation'].setValue(model.designation);
     this.form.controls['CodeResponsable'].setValue(model.codeResponsable);
     this.form.controls['StatutReservation'].setValue(model.statutReservation);
-    this.form.controls['telephone'].setValue(model.statutReservation);
+    this.form.controls['telephone'].setValue(model.telephone); // Corrected from model.statutReservation to model.telephone
     this.form.controls['DateStatutReservation'].setValue(model.dateStatutReservation);
-      // this.form = this.fb.group({
-      //   IdTerminal : [{  value:model.idTerminal,disabled : this.editMode}, [ Validators.required, Validators.maxLength(12)  ]] ,
-        
-      //   IdAffilie : [ model.idAffilie, ],
-      //   IdStation :[model.idStation, Validators.required],
-      //   SerialNumber : [ model.serialNumber,Validators.required],
-      //   IdBancaire : [ model.idBancaire,],
-      //   EtatTerminal : [ model.etatTerminal,],
-      //   DateCreation : [ model.dateCreation,],
-      //   ConfVersion : [ model.confVersion,],
-      //   BinaryVersion : [ model.binaryVersion,],
-      //   WithBalance : [ model.withBalance,],
-      //   BatchNumber : [ model.batchNumber,],
-      //   SequenceNumber : [ model.sequenceNumber,],
-      //   DatePremiereOp : [ model.datePremiereOp,],
-      //   Designation : [ model.designation,[ Validators.required, Validators.maxLength(16) ]],
-      //   CodeResponsable : [ model.codeResponsable,],
-      //   StatutReservation : [ model.statutReservation,],
-      //   telephone: [ {value :model.telephone, disabled:this.editMode},],
+ }
 
-      //   DateStatutReservation : [ model.dateStatutReservation,]
-
-      // })
-  }
-
-  checkAndSave() {
-    this.submitted = true;
-
-    if (!this.form.valid)
-      return false
-      // console.log(this.stations.find(x=>x.idStation==this.form.value.IdStation).idAffilie)
-      this.form.controls.IdAffilie.setValue(this.stations.find(x=>x.idStation==this.form.value.IdStation).idAffilie)
-                                                                                             
-    let form = this.form.getRawValue();
- 
-    form.EtatTerminal == true ? form.EtatTerminal = 1 : form.EtatTerminal = 0;
-    form.WithBalance == true ? form.WithBalance = 1 : form.WithBalance = 0;
-
-    form.StatutReservation == true ? form.StatutReservation = 1 : form.StatutReservation = 0;
-    this.isLoading = !this.isLoading;
-    // console.log(form)
-    if(!this.editMode){
-  this.terminalService.add(form).subscribe((resp: any) => {
-    this.isLoading = !this.isLoading;
-    if (resp.resultCode == 0) {
-      this.router.navigate(['/Terminal/list'])
-      if(!this.editMode)
-      this.toasterService.pop('success', '', 'Le terminal a été créé avec succés');
-      else
-      this.toasterService.pop('success', '', 'Le terminal a été modifié avec succés');
-
-    } else if (resp.resultCode == 1) {
-      this.toasterService.pop('error', '', 'Id terminal déja exist');
-      
-    }
- else {
-      this.toasterService.pop('error', '', 'Une erreur est survenue');
-
-    }
-
-  },
-    () => {
-      this.isLoading = !this.isLoading;
-
-      this.toasterService.pop('error', '', 'Une erreur est survenue');
-    });
-}
-else {
-  this.terminalService.update(form.IdTerminal, form).subscribe((resp: any) => {
-    this.isLoading = !this.isLoading;
-    if (resp.resultCode == 0) {
-      //console.log("this.respTer",resp);
-      //this.oldTerminal = resp.oldTerminal;
-      //console.log("this.oldTerminal",this.oldTerminal);
-      
-      this.router.navigate(['/Terminal/list'])
-      this.toasterService.pop('success', '', 'Le terminal a été modifié avec succés');
-    } else {
-      this.toasterService.pop('error', '', 'Une erreur est survenue');
-
-    }
-
-
-  },
-    () => {
-      this.isLoading = !this.isLoading;
-
-      this.toasterService.pop('error', '', 'Une erreur est survenue');
-    });
-}
-   
-  }// end checkAndSave
-
-  
-
-  geTpeDisponibleByStation(event:any){
-    //console.log(event);
-    
+ geTpeDisponibleByStation(event: any) {
     this.form.controls['SerialNumber'].setValue("");
-    this.tpeService.geTpeDisponibleByStation(event).subscribe((resp:any) => {
-      this.tpes=resp
-      
-        },
-    (err) => {
-    
-  });
-  }
+    this.tpeService.geTpeDisponibleByStation(event).subscribe((resp: any) => {
+      this.tpes = resp;
+    }, (err) => {
+      // Handle error
+    });
+ }
 
-
-   get f() { return this.form.controls; } 
-
-}// end class
+ get f() { return this.form.controls; }
+}

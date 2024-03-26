@@ -50,115 +50,90 @@
     <div style="height:auto;" *ngIf="this.idClient">
       <form [formGroup]="formGroupes">
         <table class="table table-striped" formArrayName="groups">
-          <thead>
-            <tr align="center">
-              <th>Porteur </th>
-              <th>Identifiant 2 </th>
-              <th style="width: 12% !important;">Type Carte</th>
-              <th style="width: 5% !important;">Gestion parc </th>
-              <th>Immatriculation </th>
-              <th>Frais carte</th>
-              <th>Tag</th>
-              <th>Numéro Tag</th>
-              <th>Saisie Km</th>
-              <th style="width: 12% !important;">Produit</th>
-              <th> <i class="icon-trash"></i></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let groupe of groupsForms.controls; let i=index" [formGroupName]="i">
-              <td>
-                <mat-form-field appearance="outline">
-                  <input matInput formControlName="identifiant" required [placeholder]="'Saisie le nom du porteur'">
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <input matInput formControlName="identifiant2" [placeholder]="'Saisie le nom du porteur'">
-                </mat-form-field>
-              </td>
-              <td>
-                <mat-form-field appearance="outline">
-                  <mat-select formControlName="typeCarte" required [placeholder]="'Choisir le type carte '">
-                    <mat-option value="prépayé">Prépayé</mat-option>
-                    <mat-option value="postpayé" [disabled]="fluxPs!='Activé'">Postpayé </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-
-              <td>
-                <mat-radio-group (change)="showMatriculation(i)" formControlName="flux" aria-label=""
-                  style="position: relative;top: 4px;">
-                  <mat-radio-button value="Hors parc">Hors parc</mat-radio-button>
-                  <mat-radio-button value="Matricule">Matricule</mat-radio-button>
-                </mat-radio-group>&nbsp;
-              </td>
-              <td>
-                <mat-form-field appearance="outline" *ngIf="groupe.value.flux=='Matricule'">
-                  <input matInput formControlName="matricule" [placeholder]="'Saisie numéro matricule'">
-                  <mat-error>{{groupe.matricule?.errors?.required ? 'ce champ est obligatoire': 'l immatriculation doit contenir au moins 6 chiffres'}} </mat-error>
-                </mat-form-field>
-              </td>
-              <td>
+           <thead>
+             <tr align="center">
+               <th>Porteur</th>
+               <th>Identifiant 2</th>
+               <th style="width: 12% !important;">Type Carte</th>
+               <th style="width: 5% !important;">Gestion parc</th>
+               <th>Immatriculation</th>
+               <th>Frais carte</th>
+               <th>Tag</th>
+               <th>Numéro Tag</th>
+               <th>Saisie Km</th>
+               <th style="width: 12% !important;">Produit</th>
+               <th><i class="icon-trash"></i></th>
+             </tr>
+           </thead>
+           <tbody>
+             <tr *ngFor="let groupe of groupsForms.controls; let i=index" [formGroupName]="i">
+               <td>
                 
+                 <input class="form-control" formControlName="identifiant" id="identifiant{{i}}" required placeholder="Saisie le nom du porteur">
+               </td>
+               <td>
                 
-              <mat-checkbox (change)="showfraisCarte(i)" matInput formControlName="fraisCarteCheck"> </mat-checkbox>
-              <div *ngIf=" groupe.value.fraisCarteCheck==true">
-                  <div *ngFor="let item of TarifList">
-                    <b *ngIf="item.produit == 'FRAI_CRE'">Frais carte: {{ item.prixUnitaire }} Dt</b>
-                  </div>
-              </div>
-
-              <!-- <td>
-                <mat-form-field appearance="outline" *ngIf="groupe.value.typeCarte=='tag'">
-                  <input matInput formControlName="numTAG">
-                  <mat-error>{{groupe.tag?.errors?.required ? 'ce champ est obligatoire': 'numéro tag doit contenir au moins 6 chiffres'}} </mat-error>
-                </mat-form-field>
-              </td> -->
-
-              <td>
-                <mat-checkbox (change)="showtag(i)" matInput formControlName="tag"> </mat-checkbox> &nbsp;
-              </td>
-              <td>
-                <mat-form-field appearance="outline" *ngIf="groupe.value.tag==true">
-                  <input matInput formControlName="numTAG" required [placeholder]="'Saisie numéro TAG '">
-                  <mat-error>{{groupe.numTAG?.errors?.required ? 'ce champ est obligatoire':'Le numéro tag est obligatoire '}} </mat-error>
-                </mat-form-field>
-
+                 <input class="form-control" formControlName="identifiant2" id="identifiant2{{i}}" placeholder="Saisie le nom du porteur">
+               </td>
+               <td>
                 
-                  <mat-checkbox (change)="showfraisTag(i)" *ngIf="groupe.value.tag==true " formControlName="fraisTagCheck"> Frais Tag</mat-checkbox>
-                  <div *ngIf=" groupe.value.fraisTagCheck==true">
-                    <div *ngFor="let item of TarifList">
-                      <b *ngIf="item.produit == 'FRAI_TAG'">Frais Tag: {{ item.prixUnitaire }} Dt</b>
-                    </div>
-                  </div>
-              </td>
-
-              <td>
-                <mat-checkbox matInput formControlName="saisieKlm"></mat-checkbox>&nbsp;
-              </td>
-
-
-              <!-- <td>
-                <mat-form-field appearance="outline">
-                  <mat-select formControlName="produit" required>
-                    <mat-option *ngFor="let item of produits" [value]="item.idProduit">
-                      {{item.produit}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td> -->
-              <td style=" width:18%;">
+                 <select class="form-control" formControlName="typeCarte" id="typeCarte{{i}}" required>
+                   <option value="prépayé">Prépayé</option>
+                   <option value="postpayé" [disabled]="fluxPs!='Activé'">Postpayé</option>
+                 </select>
+               </td>
+               <td>
+                
+                 <div class="form-check">
+                   <input class="form-check-input" type="radio" formControlName="flux" id="HorsParc{{i}}" value="Hors parc">
+                   <label class="form-check-label" for="HorsParc{{i}}">Hors parc</label>
+                 </div>
+                 <div class="form-check">
+                   <input class="form-check-input" type="radio" formControlName="flux" id="Matricule{{i}}" value="Matricule">
+                   <label class="form-check-label" for="Matricule{{i}}">Matricule</label>
+                 </div>
+               </td>
+               <td>
+                
+                 <input class="form-control" formControlName="matricule" id="matricule{{i}}" placeholder="Saisie numéro matricule">
+               </td>
+               <td>
+                 
+                 <input type="checkbox" formControlName="fraisCarteCheck" id="fraisCarteCheck{{i}}">
+                 <div *ngIf="groupe.value.fraisCarteCheck==true">
+                   <div *ngFor="let item of TarifList">
+                     <b *ngIf="item.produit == 'FRAI_CRE'">Frais carte: {{ item.prixUnitaire }} Dt</b>
+                   </div>
+                 </div>
+               </td>
+               <td>
+                 
+                 <input type="checkbox" formControlName="tag" id="tag{{i}}">
+               </td>
+               <td>
+                 
+                 <input class="form-control" formControlName="numTAG" id="numTAG{{i}}" placeholder="Saisie numéro TAG">
+               </td>
+               <td>
+                
+                 <input type="checkbox" formControlName="saisieKlm" id="saisieKlm{{i}}">
+               </td>
+             
+                
+               <td style=" width:100%;">
                 <ng-multiselect-dropdown [placeholder]="'Produit'" [settings]="dropdownSettings" [data]="produits"
                   formControlName="produit" required style=" width:113%;text-align: left;">
                 </ng-multiselect-dropdown>&nbsp;
-              </td>
-              <td>
-                <a (click)="deleteRow(i)"> <i class="icon-trash"> </i> </a>
-              </td>
-            </tr>
-          </tbody>
+              </td>          
+               
+               
+               <td>
+                 <a (click)="deleteRow(i)"> <i class="icon-trash"> </i> </a>
+               </td>
+             </tr>
+           </tbody>
         </table>
-      </form>
+       </form>
+       
     </div>
   </div>

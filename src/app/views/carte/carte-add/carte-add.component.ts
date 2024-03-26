@@ -92,7 +92,7 @@ export class CarteAddComponent implements OnInit {
   getListProduits() {
     this.produitService.ListByType().subscribe((resp: any) => {
       this.produits = resp.produitCH as []
-     // console.log("produittt", this.produits);
+      console.log("produittt", this.produits);
     },
       (err) => {
       }

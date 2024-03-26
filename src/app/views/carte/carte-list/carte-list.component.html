@@ -9,144 +9,60 @@
     <div class="card-body" *ngIf="form">
 
         <form *ngIf="!addFromClient" class="form-horizontal" [formGroup]="form">
-
             <div class="form-group row" style="margin-top: 10px; ">
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div style="text-align:center;">
-
-                        <div style="text-align:center;margin-top: 10px;">
-
-                            <input class="form-control" list="Client" placeholder="{{'Client'}}"
-
-                                formControlName="clientId">
-
-                            <datalist id="Client">
-
-                                <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{
-
-                                    item.raisonSociale }} </option>
-
-                            </datalist>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div style="text-align:center;">
-
-                        <mat-form-field appearance="outline">
-
-                            <mat-label>Date activation carte</mat-label>
-
-                            <input matInput formControlName="dateActivation" type="date">
-
-                        </mat-form-field>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xl-3 col-md-6"> 
-                    <mat-form-field appearance="outline"> 
-                          <mat-label>Date création carte</mat-label> 
-                           <input matInput formControlName="dateCreation" type="date"> 
-                       </mat-form-field> 
-                  </div> 
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div style="text-align:center;">
-
-                        <mat-form-field appearance="outline">
-
-                            <mat-label>Type carte</mat-label>
-
-                            <mat-select formControlName="TypeCarte">
-
-                                <mat-option> Tous </mat-option>
-
-                                <mat-option value="prépayé"> Prépayé </mat-option>
-
-                                <mat-option value="postpayé"> Postpayé </mat-option>
-
-                            </mat-select>
-
-                        </mat-form-field>
-
-                    </div>
-
-                </div>
-
-                <div class="col-xl-3 col-md-6">
-
-                    <div style="text-align:center;">
-
-                        <mat-form-field appearance="outline">
-
-                            <mat-label>Statut</mat-label>
-
-                            <mat-select formControlName="statut">
-
-                                <mat-option> Tous </mat-option>
-
-                                <mat-option value="0"> Active </mat-option>
-
-                                <mat-option value="1"> Inactive </mat-option>
-
-                                <mat-option value="8"> Expiré </mat-option>
-
-                                <mat-option value="10"> Remplacé </mat-option>
-
-                                <mat-option value="11"> Mise en opposition </mat-option>
-
-                                <mat-option value="7"> Bloqué </mat-option>
-
-                            </mat-select>
-
-                        </mat-form-field>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- <div class="col-xl-3 col-md-6">
-
-                    <mat-form-field appearance="outline">
-
-                        <mat-label>Date Fin</mat-label>
-
-                        <input matInput formControlName="dateFin" type="date">
-
-                        <mat-error>la Date fin doit être supérieur ou égale à la date début </mat-error>
-
-                    </mat-form-field>
-
-                </div> -->
-
-
-
-                <div class="col-md-12 text-right">
-
-                    <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getListCarte()">
-
-                        <i class="fa fa-search"> Chercher </i>
-
-                    </button>
-
-                </div>
-
+               <div class="col-xl-3 col-md-6">
+                 <label for="clientId">Client</label>
+                 
+                   <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId" id="clientId">
+                   <datalist id="Client">
+                     <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }} </option>
+                   </datalist>
+                
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="dateActivation">Date activation carte</label>
+                 <div style="text-align:center;">
+                   <input class="form-control" type="date" formControlName="dateActivation" id="dateActivation">
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="dateCreation">Date création carte</label>
+                 <div style="text-align:center;">
+                   <input class="form-control" type="date" formControlName="dateCreation" id="dateCreation">
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="TypeCarte">Type carte</label>
+                 <div style="text-align:center;">
+                   <select class="form-control" formControlName="TypeCarte" id="TypeCarte">
+                     <option value="">Tous</option>
+                     <option value="prépayé">Prépayé</option>
+                     <option value="postpayé">Postpayé</option>
+                   </select>
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="statut">Statut</label>
+                 <div style="text-align:center;">
+                   <select class="form-control" formControlName="statut" id="statut">
+                     <option value="">Tous</option>
+                     <option value="0">Active</option>
+                     <option value="1">Inactive</option>
+                     <option value="8">Expiré</option>
+                     <option value="10">Remplacé</option>
+                     <option value="11">Mise en opposition</option>
+                     <option value="7">Bloqué</option>
+                   </select>
+                 </div>
+               </div>
+               <div class="col-md-12 text-right">
+                 <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getListCarte()">
+                   <i class="fa fa-search"> Chercher </i>
+                 </button>
+               </div>
             </div>
-
-        </form>
-
+           </form>
+           
 
 
         <!-- ajout pour admin staroil -->

@@ -11,104 +11,88 @@
     <div class="card-body">
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-group row" style="margin-top: 10px;">
-          <div class="col-xl-3 col-md-6">
-            <div style="text-align:center;margin-top: 10px;">
-              <input class="form-control" list="Client" placeholder="Client" formControlName="clientId">
-              <datalist id="Client">
-                <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }} </option>
-              </datalist>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date début</mat-label>
-              <input matInput formControlName="dateDebut" type="date">
-              <mat-error>la Date début doit être inférieur ou égale à la date fin </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date Fin</mat-label>
-              <input matInput formControlName="dateFin" type="date">
-              <mat-error>la Date fin doit être supérieur ou égale à la date début </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Statut</mat-label>
-              <mat-select formControlName="status">
-                <mat-option value=""> Tous </mat-option>
-                <mat-option value="confirmé"> Confirmé </mat-option>
-                <mat-option value="demandé"> Demandé </mat-option>
-                <mat-option value="annulé"> Annulé </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Type recharge</mat-label>
-              <mat-select formControlName="typeCompte">
-                <mat-option value="">Tous</mat-option>
-                <mat-option value="20">Prépayé</mat-option>
-                <mat-option value="21">Prépayé à terme</mat-option>
-                <!-- <mat-option value="22">Postpayé</mat-option> -->
-              </mat-select>
-            </mat-form-field>&nbsp;
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Type paiement</mat-label>
-              <mat-select formControlName="typePayement">
-                <mat-option value=""> Tous </mat-option>
-                <mat-option value="virement">Virement</mat-option>
-                <mat-option value="espece">Espèce</mat-option>
-                <mat-option value="cheque">Chèque</mat-option>
-                <mat-option value="traite">Traite</mat-option>
-              </mat-select>
-            </mat-form-field>&nbsp;
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Etat</mat-label>
-              <mat-select formControlName="statutBon">
-                <mat-option value=""> Tous </mat-option>
-                <mat-option value="open">Ouvert</mat-option>
-                <mat-option value="closed">Fermé</mat-option>
-              
-              
-              </mat-select>
-            </mat-form-field>&nbsp;
-          </div>
-          <!-- <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Montant Min </mat-label>
-              <input type="number" min="1" step="1" matInput formControlName="montantMin" placeholder="Montant Min">
-              <mat-error>Le montant min doit etre inferieur ou égale au montant Max </mat-error>
-            </mat-form-field>&nbsp;
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Montant Max </mat-label>
-              <input type="number" min="1" step="1" matInput formControlName="montantMax" placeholder="Montant Max">
-            </mat-form-field>&nbsp;
-          </div> -->
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Type Opération</mat-label>
-              <mat-select formControlName="typeOperation">
-                <mat-option value=""> Tous </mat-option>
-                <mat-option value="Recharge">Recharge</mat-option>
-                <mat-option value="Paiement PS">Paiement PS</mat-option>
-              </mat-select>
-            </mat-form-field>&nbsp;
-          </div>
-          <div class="col-md-12 text-right">
-            <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getlistRecharge()">
-              <i class="fa fa-search"> Chercher </i>
-            </button>
-          </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="clientId">Client</label>
+             <div style="text-align:center;margin-top: 10px;">
+               <input class="form-control" list="Client" placeholder="Client" formControlName="clientId" id="clientId">
+               <datalist id="Client">
+                 <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }}</option>
+               </datalist>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="dateDebut">Date début</label>
+             <div style="text-align:center;">
+               <input class="form-control" type="date" formControlName="dateDebut" id="dateDebut">
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="dateFin">Date Fin</label>
+             <div style="text-align:center;">
+               <input class="form-control" type="date" formControlName="dateFin" id="dateFin">
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="status">Statut</label>
+             <div style="text-align:center;">
+               <select class="form-control" formControlName="status" id="status">
+                 <option value="">Tous</option>
+                 <option value="confirmé">Confirmé</option>
+                 <option value="demandé">Demandé</option>
+                 <option value="annulé">Annulé</option>
+               </select>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="typeCompte">Type recharge</label>
+             <div style="text-align:center;">
+               <select class="form-control" formControlName="typeCompte" id="typeCompte">
+                 <option value="">Tous</option>
+                 <option value="20">Prépayé</option>
+                 <option value="21">Prépayé à terme</option>
+               </select>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="typePayement">Type paiement</label>
+             <div style="text-align:center;">
+               <select class="form-control" formControlName="typePayement" id="typePayement">
+                 <option value="">Tous</option>
+                 <option value="virement">Virement</option>
+                 <option value="espece">Espèce</option>
+                 <option value="cheque">Chèque</option>
+                 <option value="traite">Traite</option>
+               </select>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="statutBon">Etat</label>
+             <div style="text-align:center;">
+               <select class="form-control" formControlName="statutBon" id="statutBon">
+                 <option value="">Tous</option>
+                 <option value="open">Ouvert</option>
+                 <option value="closed">Fermé</option>
+               </select>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="typeOperation">Type Opération</label>
+             <div style="text-align:center;">
+               <select class="form-control" formControlName="typeOperation" id="typeOperation">
+                 <option value="">Tous</option>
+                 <option value="Recharge">Recharge</option>
+                 <option value="Paiement PS">Paiement PS</option>
+               </select>
+             </div>
+           </div>
         </div>
-      </form>
+        <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+           <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getlistRecharge()">
+             <i class="fa fa-search"> Chercher </i>
+           </button>
+        </div>
+       </form>
+       
       <div style="overflow-x:auto;">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover display nowrap" width="100%">
           <thead align="center">

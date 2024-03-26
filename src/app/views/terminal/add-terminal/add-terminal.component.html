@@ -5,101 +5,91 @@
                 </div>
                 <div class="card-body" *ngIf="form">
                   <form class="form-horizontal row" [formGroup]="form">
-    
-                      
-                          <div class="col-sm-6">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Station</mat-label>
-                              <mat-select formControlName="IdStation"  (selectionChange)="geTpeDisponibleByStation($event.value)" required placeholder="Station">
-                                <mat-option  value="" disabled > -choisir-</mat-option>
-
-                                <mat-option *ngFor="let item of stations" value="{{item.idStation}}" > {{item.nom}} </mat-option>
-
-                              </mat-select>
-                              <mat-error >ce champ est obligatoire</mat-error>    
-
-                            </mat-form-field>&nbsp;
-                            <!-- (selectionChange)="filtreStations()"  -->
-                          </div>
-
-                          <div class="col-sm-6">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Numéro de série</mat-label>
-                              <mat-select formControlName="SerialNumber" required placeholder="Numéro de série" >
-                                <mat-option *ngFor="let item of tpes"  value="{{item.serialNumber}}" required>{{ item.serialNumber }} </mat-option>
-                              </mat-select>
-                              <mat-error *ngIf="form.get('SerialNumber').hasError('required')">Ce champ est obligatoire</mat-error>
-                            </mat-form-field>&nbsp;
-                          </div>
-
-
-                          <div class="col-sm-6">
-                            <mat-form-field appearance="outline">
-                              <mat-label>Id Terminal</mat-label>
-                              <input matInput  formControlName="IdTerminal"  required placeholder="Id Terminal">
-                              <mat-error *ngIf="form.get('IdTerminal').hasError('maxlength')">L'Id terminal doit contenir au maximum 12 chiffres</mat-error>                            </mat-form-field>&nbsp;
-                          </div>
-                          <div class="col-sm-6">
-
-
-                            <mat-form-field appearance="outline">
-                              <mat-label>Désignation</mat-label>
-                              <input matInput formControlName="Designation"  required placeholder="Designation">
-                              <mat-error >{{f.Designation.errors?.required?'ce champ est obligatoire' : 'la Désignation doit contenir au maximum 16 caractères alphanumérique' }}</mat-error>    
-                            </mat-form-field>&nbsp;
+                    <div class="col-sm-6">
+                       <label for="IdStation">Station</label>
+                       <select class="form-control" formControlName="IdStation" id="IdStation" (change)="geTpeDisponibleByStation($event.target.value)" required>
+                         <option value="" disabled>-choisir-</option>
+                         <option *ngFor="let item of stations" [value]="item.idStation">{{item.nom}}</option>
+                       </select>
+                       <div *ngIf="form.get('IdStation').errors?.required" class="text-danger">
+                         Ce champ est obligatoire
+                       </div>
+                    </div>
                    
-                          </div>
-                          <div class="col-sm-6">
-
-
-                            <mat-form-field appearance="outline">
-                              <mat-label>Numéro de téléphone</mat-label>
-                              <input matInput formControlName="telephone" required placeholder="Téléphone" pattern="[1-9][0-9]{7}">
-                              <mat-error >{{f.telephone.errors?.required?'ce champ est obligatoire' : 'le Numéro de téléphone doit contenir 8 chiffres' }}</mat-error>    
-                            </mat-form-field>&nbsp;
-                     
-                          </div>
-                          <div class="col-sm-6" *ngIf="editMode">
-
-
-                            <mat-form-field appearance="outline">
-                              <mat-label>Id Bancaire</mat-label>
-                              <input matInput formControlName="IdBancaire"  placeholder=" Id Bancaire">
-                              <mat-error >ce champ est obligatoire</mat-error>    
-                            </mat-form-field>&nbsp;
-                     
-                          </div>
-                          <div class="col-sm-6" *ngIf="editMode">
-
-
-                            <mat-form-field appearance="outline">
-                              <mat-label>Code Responsable</mat-label>
-                              <input matInput formControlName="CodeResponsable"  placeholder=" Code Responsable">
-                              <mat-error >ce champ est obligatoire</mat-error>    
-                            </mat-form-field>&nbsp;
-                     
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="col-sm-12">
-                              <mat-checkbox matInput formControlName="EtatTerminal">Actif</mat-checkbox>&nbsp;
-                      
-                              <mat-checkbox matInput formControlName="WithBalance"> Afficher solde</mat-checkbox>&nbsp;
-
-                            
-                        </div>
-                      
-          </div>
-                        <div class="col-sm-12 text-right">
-                            <!-- <a class="btn btn-secondary btn-ladda" data-style="expand-left" style="margin-right:20px; color: rgb(42, 42, 44);" [routerLink]="[ '/tpe/list']">
-                              <i class="fa fa-undo"></i>  Annuler
-                          </a> -->
-                          <button class="btn btn-success btn-ladda" data-style="expand-left" [ladda]='isLoading'(click)="checkAndSave()">
-                            <i class="fa fa-plus"></i>  {{editMode?"Modifier ": "Ajouter"}}
-                          </button>
-                      </div>
-      
-                     
-                  </form>
+                    <div class="col-sm-6">
+                       <label for="SerialNumber">Numéro de série</label>
+                       <select class="form-control" formControlName="SerialNumber" id="SerialNumber" required>
+                         <option *ngFor="let item of tpes" [value]="item.serialNumber">{{item.serialNumber}}</option>
+                       </select>
+                       <div *ngIf="form.get('SerialNumber').errors?.required" class="text-danger">
+                         Ce champ est obligatoire
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-6">
+                       <label for="IdTerminal">Id Terminal</label>
+                       <input class="form-control" formControlName="IdTerminal" id="IdTerminal" required placeholder="Id Terminal">
+                       <div *ngIf="form.get('IdTerminal').errors?.maxlength" class="text-danger">
+                         L'Id terminal doit contenir au maximum 12 chiffres
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-6">
+                       <label for="Designation">Désignation</label>
+                       <input class="form-control" formControlName="Designation" id="Designation" required placeholder="Designation">
+                       <div *ngIf="form.get('Designation').errors?.required" class="text-danger">
+                         Ce champ est obligatoire
+                       </div>
+                       <div *ngIf="form.get('Designation').errors?.maxlength" class="text-danger">
+                         La Désignation doit contenir au maximum 16 caractères alphanumérique
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-6">
+                       <label for="telephone">Numéro de téléphone</label>
+                       <input class="form-control" formControlName="telephone" id="telephone" required placeholder="Téléphone" pattern="[1-9][0-9]{7}">
+                       <div *ngIf="form.get('telephone').errors?.required" class="text-danger">
+                         Ce champ est obligatoire
+                       </div>
+                       <div *ngIf="form.get('telephone').errors?.pattern" class="text-danger">
+                         Le Numéro de téléphone doit contenir 8 chiffres
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-6" *ngIf="editMode">
+                       <label for="IdBancaire">Id Bancaire</label>
+                       <input class="form-control" formControlName="IdBancaire" id="IdBancaire" placeholder="Id Bancaire">
+                       <div *ngIf="form.get('IdBancaire').errors?.required" class="text-danger">
+                         Ce champ est obligatoire
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-6" *ngIf="editMode">
+                       <label for="CodeResponsable">Code Responsable</label>
+                       <input class="form-control" formControlName="CodeResponsable" id="CodeResponsable" placeholder="Code Responsable">
+                       <div *ngIf="form.get('CodeResponsable').errors?.required" class="text-danger">
+                         Ce champ est obligatoire
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-6">
+                       <div class="form-check">
+                         <input class="form-check-input" type="checkbox" formControlName="EtatTerminal" id="EtatTerminal">
+                         <label class="form-check-label" for="EtatTerminal">Actif</label>
+                       </div>
+                       <div class="form-check">
+                         <input class="form-check-input" type="checkbox" formControlName="WithBalance" id="WithBalance">
+                         <label class="form-check-label" for="WithBalance">Afficher solde</label>
+                       </div>
+                    </div>
+                   
+                    <div class="col-sm-12 text-right">
+                       <button class="btn btn-success btn-ladda" data-style="expand-left" [ladda]='isLoading' (click)="checkAndSave()">
+                         <i class="fa fa-plus"></i> {{editMode?"Modifier ": "Ajouter"}}
+                       </button>
+                    </div>
+                   </form>
+                   
                 </div>
               </div>
 

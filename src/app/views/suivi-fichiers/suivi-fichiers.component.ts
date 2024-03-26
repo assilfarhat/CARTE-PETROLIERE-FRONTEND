@@ -31,6 +31,7 @@ export class SuiviFichiersComponent implements OnInit {
   progress: number;
   recharge: any;
   dateString: string;
+  dateStringdebut: string;
   isDownloading: boolean;
   renisialiser: boolean;
   selectedFile: any;
@@ -154,9 +155,14 @@ export class SuiviFichiersComponent implements OnInit {
     //     // console.log("bon recharge", res)
     //   }
     // );
+    const firstDayOfYear = new Date();
+    firstDayOfYear.setMonth(0); // January is 0
+    firstDayOfYear.setDate(1); // Set the day to the 1st
 
+      this.dateStringdebut =this.datePipe.transform(firstDayOfYear, "yyyy-MM-dd")
+      console.log("date",this.dateStringdebut)
     this.dateString = this.datePipe.transform(new Date(), "yyyy-MM-dd")
-
+    console.log("date",this.dateString)
     if (this.route.snapshot.paramMap.get('id')) {
       this.idClient = this.route.snapshot.paramMap.get('id')
       this.withParameter = true;
@@ -167,7 +173,7 @@ export class SuiviFichiersComponent implements OnInit {
 
       clientId: [{ value: this.withParameter ? this.idClient : (this.params['clientId'] == undefined ? '' : this.params['clientId']), disabled: this.withParameter }],
       dateFin: [this.params['dateFin'] == undefined ? this.dateString : this.params['dateFin']],
-      dateDebut: [this.params['dateDebut'] == undefined ? this.dateString : this.params['dateDebut']],
+      dateDebut: [this.params['dateDebut'] == undefined ? this.dateStringdebut : this.params['dateDebut']],
       status: [this.params['status'] == undefined ? '' : this.params['status']],
       reference: [this.params['reference'] == undefined ? '' : this.params['reference']],
       typeFile: [this.params['typeFile'] == undefined ? '' : this.params['typeFile']],
@@ -178,7 +184,7 @@ export class SuiviFichiersComponent implements OnInit {
     )
 
     this.form.patchValue({
-      dateDebut: this.dateString,
+      dateDebut: this.dateStringdebut,
       dateFin: this.dateString,
     });
 
@@ -245,7 +251,7 @@ export class SuiviFichiersComponent implements OnInit {
     filtre.dateFin = this.datePipe.transform(this.form.get("dateFin").value, 'yyyyMMdd')
 
     // console.log('filtre.dateFinnnnnnnnnn', filtre.dateFin)
-    //console.log('filtre.dateDebuuuuuuuuuuuut', filtre.dateDebut)
+    console.log('filtre.dateDebuuuuuuuuuuuut', filtre.dateDebut)
     //console.log('form recharg', this.form.value)
 
     let dateFin = this.datePipe.transform(this.form.get("dateFin").value, 'yyyyMMdd')

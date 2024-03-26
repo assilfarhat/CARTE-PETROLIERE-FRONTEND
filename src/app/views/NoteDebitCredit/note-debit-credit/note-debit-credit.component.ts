@@ -106,7 +106,7 @@ export class NoteDebitCreditComponent implements OnInit {
     dateStringNDC.setDate(dateStringNDC.getDate() - 1);
     this.dateString = this.datePipe.transform(new Date(), "yyyy-MM-dd")
     this.dateStringNDC2 = this.datePipe.transform(dateStringNDC, "yyyy-MM-dd")
-    //console.log("datfv",this.dateStringNDC2);
+    console.log("datfv",this.dateStringNDC2);
     
 
 

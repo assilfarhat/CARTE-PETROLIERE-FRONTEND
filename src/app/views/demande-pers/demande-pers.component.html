@@ -6,61 +6,55 @@
 
         <form class="form-horizontal" [formGroup]="formSearch">
             <div class="form-group row" style="margin-top: 10px; ">
-
-                <div class="col-xl-3 col-md-6">
-                    <div style="text-align:center;margin-top: 10px;">
-                        <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId">
-                        <datalist id="Client">
-                            <option *ngFor="let item of ClientListDropdown" [value]="item.raisonSociale">
-                                {{item.raisonSociale }}
-                            </option>
-                        </datalist>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Statut</mat-label>
-                        <mat-select formControlName="statut">
-                            <mat-option value=""> Tous  </mat-option>
-                            <mat-option value="0"> demandée </mat-option>
-                            <mat-option value="1"> acceptée </mat-option>
-                            <mat-option value="2"> rejetée </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                 <div class="col-xl-3 col-md-6"> 
-                   <mat-form-field appearance="outline"> 
-                      <mat-label>Date début (Création)</mat-label>
-                       <input matInput formControlName="dateDebut" type="date">
-                       <mat-error>la Date début doit être inférieur ou égale à la date fin </mat-error>
-                    </mat-form-field> 
-                 </div> 
-                <div class="col-xl-3 col-md-6"> 
-                  <mat-form-field appearance="outline"> 
-                        <mat-label>Date Fin (Création)</mat-label> 
-                         <input matInput formControlName="dateFin" type="date"> 
-                        <mat-error>la Date fin doit être supérieur ou égale à la date début </mat-error> 
-                     </mat-form-field> 
-                </div> 
-                <div class="col-xl-3 col-md-6"> 
-                    <mat-form-field appearance="outline"> 
-                          <mat-label>Date Validation</mat-label> 
-                           <input matInput formControlName="dateValidation" type="date"> 
-                       </mat-form-field> 
-                  </div> 
-                <div class="col-md-12 text-right">
-                    <button class="btn btn-primary btn-ladda" data-style="expand-left" 
-                        (click)="getListeDemandePerso()">
-                        <i class="fa fa-search"><b> Chercher</b> </i>
-                    </button> &nbsp;
-                    <!-- <a class="btn btn-secondary btn-ladda" data-style="expand-left" (click)="downlaod()">
-                        <i class="fa fa-download"></i> <b>Télécharger</b>
-                    </a>&nbsp; -->
-                </div>
-
+               <div class="col-xl-3 col-md-6">
+                 <label for="clientId">Client</label>
+                 <div style="text-align:center;margin-top: 10px;">
+                   <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId" id="clientId">
+                   <datalist id="Client">
+                     <option *ngFor="let item of ClientListDropdown" [value]="item.raisonSociale">{{item.raisonSociale }} </option>
+                   </datalist>
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="statut">Statut</label>
+                 <div style="text-align:center;">
+                   <select class="form-control" formControlName="statut" id="statut">
+                     <option value="">Tous</option>
+                     <option value="0">demandée</option>
+                     <option value="1">acceptée</option>
+                     <option value="2">rejetée</option>
+                   </select>
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="dateDebut">Date début (Création)</label>
+                 <div style="text-align:center;">
+                   <input class="form-control" type="date" formControlName="dateDebut" id="dateDebut">
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="dateFin">Date Fin (Création)</label>
+                 <div style="text-align:center;">
+                   <input class="form-control" type="date" formControlName="dateFin" id="dateFin">
+                 </div>
+               </div>
+               <div class="col-xl-3 col-md-6">
+                 <label for="dateValidation">Date Validation</label>
+                 <div style="text-align:center;">
+                   <input class="form-control" type="date" formControlName="dateValidation" id="dateValidation">
+                 </div>
+               </div>
             </div>
-        </form>
+            <div class="col-md-12 text-right">
+               <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getListeDemandePerso()">
+                 <i class="fa fa-search"><b> Chercher</b> </i>
+               </button> &nbsp;
+               <!-- <a class="btn btn-secondary btn-ladda" data-style="expand-left" (click)="downlaod()">
+                 <i class="fa fa-download"></i> <b>Télécharger</b>
+               </a>&nbsp; -->
+            </div>
+           </form>
+           
 
         <div style="overflow-x:auto; margin-top: 20px;">
             <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"

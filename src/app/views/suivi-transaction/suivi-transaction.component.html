@@ -6,111 +6,75 @@
     <div class="card-body">
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-group row" style="margin-top: 10px">
-          <div class="col-xl-3 col-md-6">
-            <div style="text-align:center;margin-top: 10px;">
-              <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId">
-              <datalist id="Client">
-                <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }} </option>
-              </datalist>
-            </div>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date début</mat-label>
-              <input matInput formControlName="dateDebut" type="date" />
-              <mat-error>la Date début doit être inférieur ou égale à la date fin
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Date Fin</mat-label>
-              <input matInput formControlName="dateFin" type="date" />
-              <mat-error>la Date fin doit être supérieur ou égale à la date début
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <!-- <div class="col-xl-3 col-md-6">
-                <mat-form-field appearance="outline">
-                    <mat-label>Statut</mat-label>
-                    <mat-select formControlName="status">
-                        <mat-option value=""> Tous  </mat-option>
-                        <mat-option value="confirmer"> confirmer  </mat-option>
-                        <mat-option value="demandé"> demander </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div> -->
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Type compte</mat-label>
-              <mat-select formControlName="typeCompte">
-                <mat-option value="">Tous</mat-option>
-                <mat-option value="prépayé">Prépayé</mat-option>
-                <mat-option value="prépayé à terme">Prépayé à terme</mat-option>
-                <mat-option value="postpayé">Postpayé</mat-option>
-              </mat-select> </mat-form-field>&nbsp;
-          </div>
-
-          <div class="col-xl-3 col-md-6">
-            <input class="form-control" list="Station" placeholder="{{'Station'}}" formControlName="idStation">
-            <datalist id="Station">
-              <option *ngFor="let item of StationList" [value]="item.stationName">{{ item.stationName }} </option>
-            </datalist>
-          </div>
-
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Etat Transaction</mat-label>
-              <mat-select formControlName="etattransaction">
-                <mat-option value="">Tous</mat-option>
-                <mat-option value="Transaction Autourisée">Transaction Autourisée</mat-option>
-                <mat-option value="Transaction Annulée">Transaction Annulée</mat-option>
-                <mat-option value="Transaction Rejeté">Transaction Rejeté</mat-option>
-              </mat-select> </mat-form-field>&nbsp;
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Numéro carte </mat-label>
-              <input type="text" matInput formControlName="NumCarte" placeholder="Num Carte " />
-            </mat-form-field>
-          </div>
-          <!-- <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Montant Min </mat-label>
-              <input type="number" min="1" step="1" matInput formControlName="montantMin" placeholder="Montant Min" />
-              <mat-error> Le montant maximum doit être supérieur ou égal au montant minimum!</mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Montant Max </mat-label>
-              <input type="number" min="1" step="1" matInput formControlName="montantMax" placeholder="Montant Max" />
-            </mat-form-field>
-          </div> -->
-
-          <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label>Porteur carte</mat-label>
-              <input type="text" matInput formControlName="porteur" placeholder="Nom Porteur" />
-            </mat-form-field>
-          </div>
-
-          <!-- <div class="col-xl-3 col-md-6">
-            <mat-form-field appearance="outline">
-              <mat-label> ID Station </mat-label>
-              <input type="text" matInput formControlName="idStation" placeholder="ID station" />
-            </mat-form-field>
-          </div> -->
-             <div class="col-md-12 text-right">
-       <button class="btn btn-primary btn-ladda" data-style="expand-left" 
-           (click)="getListTransaction()">
-           <i class="fa fa-search"> Chercher </i>
-       </button>
-   </div>
-
+           <div class="col-xl-3 col-md-6">
+             <label for="clientId">Client</label>
+             <div style="text-align:center;margin-top: 10px;">
+               <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="clientId" id="clientId">
+               <datalist id="Client">
+                 <option *ngFor="let item of ClientList" [value]="item.raisonSociale">{{ item.raisonSociale }} </option>
+               </datalist>
+             </div>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="dateDebut">Date début</label>
+             
+               <input class="form-control" type="date" formControlName="dateDebut" placeholder="date debut" [max]="dateString" id="dateDebut">
+               <div *ngIf="form.get('dateDebut').value > form.get('dateFin').value" class="help-block text-danger">
+                 la Date début doit être inférieur ou égale à la date fin</div>
+            
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="dateFin">Date fin</label>
+             
+               <input class="form-control" type="date" formControlName="dateFin" placeholder="date fin" [max]="dateString" id="dateFin">
+               <!-- <div *ngIf="form.get('dateFin').value > form.get('dateDebut').value" class="help-block text-danger">Date
+                 fin doit être supérieur à date début !!!</div> -->
+               <div *ngIf="form.get('dateFin').value > dateString" class="help-block text-danger">Date fin ne doit
+                 pas dépasser la date d'aujourd'hui !!!</div>
+             
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="typeCompte">Type compte</label>
+             <select class="form-control" formControlName="typeCompte" id="typeCompte">
+               <option value="">Tous</option>
+               <option value="prépayé">Prépayé</option>
+               <option value="prépayé à terme">Prépayé à terme</option>
+               <option value="postpayé">Postpayé</option>
+             </select>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="idStation">Station</label>
+             <input class="form-control" list="Station" placeholder="{{'Station'}}" formControlName="idStation" id="idStation">
+             <datalist id="Station">
+               <option *ngFor="let item of StationList" [value]="item.stationName">{{ item.stationName }} </option>
+             </datalist>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="etattransaction">Etat Transaction</label>
+             <select class="form-control" formControlName="etattransaction" id="etattransaction">
+               <option value="">Tous</option>
+               <option value="Transaction Autourisée">Transaction Autourisée</option>
+               <option value="Transaction Annulée">Transaction Annulée</option>
+               <option value="Transaction Rejeté">Transaction Rejeté</option>
+             </select>
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="NumCarte">Numéro carte</label>
+             <input class="form-control" type="text" formControlName="NumCarte" placeholder="Num Carte " id="NumCarte">
+           </div>
+           <div class="col-xl-3 col-md-6">
+             <label for="porteur">Porteur carte</label>
+             <input class="form-control" type="text" formControlName="porteur" placeholder="Nom Porteur" id="porteur">
+           </div>
+           <div class="col-md-12 text-right" style="margin-top: 10px;">
+             <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="getListTransaction()">
+               <i class="fa fa-search"> Chercher </i>
+             </button>
+           </div>
         </div>
-
-      </form>
+       </form>
+       
+       
 
       <!-- <form class="form-horizontal" [formGroup]="form">
         <div class="form-group row" class="pull-right">

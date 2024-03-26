@@ -24,122 +24,46 @@
             </div>
             <form class="form-horizontal" [formGroup]="form">
               <div class="form-group row" style="margin-top: 10px;">
-
-                <div class="col-xl-3 col-md-6">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Date début</mat-label>
-                    <input matInput formControlName="dateStart" type="date">
-                    <mat-error>la Date début doit être inférieur ou égale à la date fin </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col-xl-3 col-md-6">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Date Fin</mat-label>
-                    <input matInput formControlName="dateEnd" type="date">
-                    <mat-error>la Date fin doit être supérieur ou égale à la date début </mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-xl-3 col-md-6">
-
-                  <mat-form-field appearance="outline">
-
-                    <mat-label>Statut</mat-label>
-                    <mat-select formControlName="statut">
-                      <mat-option value=""> Tous </mat-option>
-                      <mat-option value="Nouvelle"> Nouvelle </mat-option>
-                      <mat-option value="En cours de traitement"> En cours de traitement </mat-option>
-                      <mat-option value="Traitée"> Traitée </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-
-
-                
-                <div class="col-xl-3 col-md-6" *ngIf=" ActualUser != 'GERANT' ">
-                  <div style="text-align:center;margin-top: 10px;">
-                    <input class="form-control" list="Station" placeholder="{{'Station'}}" formControlName="IdStation">
-                    <datalist id="Station">
-                      <option *ngFor="let item of StationList" [value]="item.idStation">{{ item.stationName }} </option>
-                    </datalist>
-                  </div>
-                </div>
-
-                <!-- <div class="col-xl-3 col-md-6"> -->
-
-                  <!-- <mat-form-field appearance="outline">
-
-                          <mat-label>Client</mat-label>
-                          <mat-select formControlName="IdClient">
-                            <mat-option value=""> Tous  </mat-option>
-
-                              <mat-option *ngFor="let item of ClientList" [value]="item.idClient">
-                                  {{item.raisonSociale}}
-                              </mat-option>
-                          </mat-select>
-                      </mat-form-field> -->
-                  <!-- <div style="text-align:center;margin-top: 10px;">
-
-
-
-                    <input class="form-control" list="Client" placeholder="{{'Client'}}" formControlName="IdClient">
-
-                    <datalist id="Client">
-
-                      <option *ngFor="let item of ClientList" [value]="item.idClient">{{ item.raisonSociale }} </option>
-                    </datalist>
-
-                  </div> -->
-                <!-- </div> -->
-
-
+                 <div class="col-xl-3 col-md-6">
+                   <label for="dateStart">Date début</label>
+                   <div style="text-align:center;">
+                     <input class="form-control" type="date" formControlName="dateStart" id="dateStart">
+                   </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6">
+                   <label for="dateEnd">Date Fin</label>
+                   <div style="text-align:center;">
+                     <input class="form-control" type="date" formControlName="dateEnd" id="dateEnd">
+                   </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6">
+                   <label for="statut">Statut</label>
+                   <div style="text-align:center;">
+                     <select class="form-control" formControlName="statut" id="statut">
+                       <option value="">Tous</option>
+                       <option value="Nouvelle">Nouvelle</option>
+                       <option value="En cours de traitement">En cours de traitement</option>
+                       <option value="Traitée">Traitée</option>
+                     </select>
+                   </div>
+                 </div>
+                 <div class="col-xl-3 col-md-6" *ngIf="ActualUser != 'GERANT'">
+                   <label for="IdStation">Station</label>
+                   <div style="text-align:center;">
+                     <input class="form-control" list="Station" placeholder="{{'Station'}}" formControlName="IdStation" id="IdStation">
+                     <datalist id="Station">
+                       <option *ngFor="let item of StationList" [value]="item.idStation">{{ item.stationName }}</option>
+                     </datalist>
+                   </div>
+                 </div>
+              </div>
+              <div class="col-md-12 text-right">
+                 <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="rerender()">
+                   <i class="fa fa-search"> Chercher </i>
+                 </button>
+              </div>
+             </form>
              
-
-
-                <!--
-                    <div class="col-xl-3 col-md-6">
-
-                      <mat-form-field appearance="outline">
-                        <mat-label>Prénom de client </mat-label>
-                        <input type="text" matInput formControlName="prenomclient"   placeholder="Prénom de client">
-                      </mat-form-field>
-                  </div>
-
-
-                <div class="col-xl-3 col-md-6">
-
-                  <mat-form-field appearance="outline">
-                    <mat-label>Nom de client </mat-label>
-                    <input type="text" matInput formControlName="nomclient"   placeholder="Nom de client">
-                  </mat-form-field>
-              </div>
-
-
-
-                  <div class="col-xl-3 col-md-6">
-
-                    <mat-form-field appearance="outline">
-
-                        <mat-label>Role</mat-label>
-                        <mat-select formControlName="role">
-                            <mat-option value=""> - Choisir -  </mat-option>
-                            <mat-option value="GERANT"> GERANT  </mat-option>
-                            <mat-option value="CLIENT"> CLIENT </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div> -->
-
-               
-
-
-                <div class="col-md-12 text-right">
-                  <button class="btn btn-primary btn-ladda" data-style="expand-left" (click)="rerender()">
-                    <i class="fa fa-search"> Chercher </i>
-                  </button>
-                </div>
-              </div>
-            </form>
-
             <!-- {{reclamations| json}} -->
             <div style="overflow-x:auto;">
               <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" width="100%">
