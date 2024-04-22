@@ -18,6 +18,24 @@ export const navigation = [
     icon: 'icon-speedometer',
 
   },
+  {
+
+    name: 'service',
+
+    url: '/service',
+
+    icon: 'fa fa-home',
+
+  },
+  {
+
+    name: 'remise',
+
+    url: '/remise',
+
+    icon: 'fa fa-home',
+
+  },
   // {
 
   //   name: 'Gestion d acces',

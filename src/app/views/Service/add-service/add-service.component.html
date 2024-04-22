@@ -1,0 +1,66 @@
+<div class="card">
+    <h5 class="card-title"><div class="card-header"><strong>{{editMode? "Modifier Service" : "Nouveau Service" }} </strong> <small></small></div></h5>
+    <div class="card-body">
+      
+  
+        
+          <form  [formGroup]="Formservice"  *ngIf="Formservice" autocomplete="off">
+            
+            <div class="row">
+             
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="idservice">Code Service</label>
+                        <input type="text" class="form-control" id="idservice" formControlName="idservice" required placeholder="Nom">
+                        <div *ngIf="Formservice.controls.idservice.invalid && Formservice.controls.idservice.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="serviceName">Libellé</label>
+                        <input type="text" class="form-control" id="serviceName" formControlName="serviceName" required placeholder="Nom">
+                        <div *ngIf="Formservice.controls.serviceName.invalid && Formservice.controls.serviceName.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="prix">Prix</label>
+                        <input type="number" class="form-control" id="prix" formControlName="prix" required placeholder="Nom">
+                        <div *ngIf="Formservice.controls.prix.invalid && Formservice.controls.prix.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="coefficient">Coefficient</label>
+                        <input type="number" class="form-control" id="coefficient" formControlName="coefficient" required placeholder="Nom">
+                        <div *ngIf="Formservice.controls.coefficient.invalid && Formservice.controls.coefficient.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="tauxTaxe">Taux de Taxe</label>
+                        <input type="text" class="form-control" id="tauxTaxe" formControlName="tauxTaxe" required placeholder="Nom">
+                        <div *ngIf="Formservice.controls.tauxTaxe.invalid && Formservice.controls.tauxTaxe.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+  
+     
+     
+      <button mat-raised-button class="btn btn-info pull-right" color="primary" [disabled]="Formservice.invalid" (click)="onSubmit()">
+        {{editMode?"Modifier ": "Ajouter"}}
+      </button>
+  
+    </div>
+  

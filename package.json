@@ -34,7 +34,7 @@
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
     "angular-calendar": "0.28.28",
-    "angular-datatables": "^8.0.0",
+    "angular-datatables": "15.0.1",
     "angular2-datatable": "^0.6.0",
     "angular2-datatable-pagination": "0.0.3",
     "angular2-ladda": "1.2.3",
@@ -42,7 +42,7 @@
     "angular2-toaster": "6.0.0",
     "bootstrap": "^4.0.0-beta.3",
     "brace": "0.11.0",
-    "chart.js": "^2.8.0",
+    ".jcharts": "^2.8.0",
     "codemirror": "5.33.0",
     "core-js": "2.5.3",
     "datatables.net": "^1.10.19",
@@ -81,7 +81,7 @@
     "zone.js": "~0.11.8"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~15.2.10",
+    "@angular-devkit/build-angular": "15.2.11",
     "@angular/cli": "15.2.10",
     "@angular/compiler-cli": "15.2.10",
     "@angular/language-service": "15.2.10",

@@ -1,5 +1,21 @@
-import { FormGroup } from "@angular/forms";
+import { FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 
+export function montantRangeValidator(): ValidatorFn {
+  return (formGroup: FormGroup): ValidationErrors | null => {
+     const montantMin = formGroup.get('montantMin');
+     const montantMax = formGroup.get('montantMax');
+ 
+     if (!montantMin || !montantMax) {
+       return null; // If controls are not yet initialized, return null
+     }
+ 
+     if (montantMin.value >= montantMax.value) {
+       return { 'montantRange': true }; // Return an error if montantMin is not less than montantMax
+     }
+ 
+     return null; // Return null if validation passes
+  };
+ }
 export function CompareAmounts(minAmount: any, maxAmount: any) {
   return (formGroup: FormGroup) => {
 
@@ -7,7 +23,7 @@ export function CompareAmounts(minAmount: any, maxAmount: any) {
     const MaxAmount = formGroup.controls[maxAmount];
 
 
-    //console.log(MinAmount.value, MaxAmount.value, Number(MinAmount.value), Number(MaxAmount.value), Number(MinAmount.value) > Number(MaxAmount.value))
+    console.log(MinAmount.value, MaxAmount.value, Number(MinAmount.value), Number(MaxAmount.value), Number(MinAmount.value) > Number(MaxAmount.value))
 
     if (MinAmount.value == '' || MaxAmount.value == ''|| MaxAmount.value == null|| MinAmount.value == null){
       MinAmount.setErrors(null);
@@ -31,6 +47,25 @@ export function CompareAmounts(minAmount: any, maxAmount: any) {
 
   }
 }
+export function DateMustBeLaterThanToday(): ValidatorFn {
+  return (formGroup: FormGroup): ValidationErrors | null => {
+     const dateExpirationControl = formGroup.get('dateExpiration');
+ 
+     if (!dateExpirationControl) {
+       return null; // If the control is not yet initialized, return null
+     }
+ 
+     const today = new Date();
+     today.setHours(0, 0, 0, 0); // Set the time to 00:00:00 to compare only the date part
+ 
+     if (dateExpirationControl.value && new Date(dateExpirationControl.value) >= today) {
+       return null; // Return null if the date is later than today
+     } else {
+       return { 'DateMustBeLaterThanToday': true }; // Return an error if the date is not later than today
+     }
+  };
+ }
+
 
 export function CompareDates(dateDebut: any, dateFin: any) {
   return (formGroup: FormGroup) => {

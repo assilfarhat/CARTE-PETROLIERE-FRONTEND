@@ -7,7 +7,7 @@ import { ClientService } from 'app/services/client.service';
   styleUrls: ['./client-info.component.scss']
 })
 export class ClientInfoComponent implements OnInit {
-  @Input() idClient;
+  @Input() idClient: any;
   client: any;
   montantAutorisePpe: number;
   montantAutorisePS : number;

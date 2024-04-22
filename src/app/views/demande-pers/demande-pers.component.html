@@ -162,6 +162,7 @@
                                                 <th>Numéro Tag</th>
                                                 <th>Tag</th>
                                                 <th>Saisie Km</th>
+                                                <th>Fadilité</th>
                                                 <th>Produit</th>
                                             </tr>
                                         </thead>
@@ -184,6 +185,12 @@
                                                     <i style="color: red;font-size:15px" *ngIf="!item.saisieKlm"
                                                         class="fa fa-times" aria-hidden="true"></i>
                                                     <i style="color: green;font-size:15px" *ngIf="item.saisieKlm"
+                                                        class="fa fa-check" aria-hidden="true"></i>
+                                                </td>
+                                                <td>
+                                                    <i style="color: red;font-size:15px" *ngIf="!item.progFidalite"
+                                                        class="fa fa-times" aria-hidden="true"></i>
+                                                    <i style="color: green;font-size:15px" *ngIf="item.progFidalite"
                                                         class="fa fa-check" aria-hidden="true"></i>
                                                 </td>
                                                 <td>{{item.produit}}</td>

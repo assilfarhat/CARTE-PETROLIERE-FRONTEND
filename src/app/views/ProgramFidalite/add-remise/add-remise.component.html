@@ -1,0 +1,76 @@
+<div class="card">
+    <h5 class="card-title"><div class="card-header"><strong>{{editMode? "Modifier Service" : "Nouveau Service" }} </strong> <small></small></div></h5>
+    <div class="card-body">
+      
+  
+        
+          <form  [formGroup]="Formremise"  *ngIf="Formremise" autocomplete="off">
+            
+            <div class="row">
+             
+                <!-- <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="idRemise">Code Remise</label>
+                        <input type="text" class="form-control" id="idRemise" formControlName="idRemise" required placeholder="Nom">
+                        <div *ngIf="Formremise.controls.idRemise.invalid && Formremise.controls.idRemise.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="tauxRemise">Taux Remise</label>
+                        <input type="number" class="form-control" id="tauxRemise" formControlName="tauxRemise" required placeholder="tauxRemise">
+                        <div *ngIf="Formremise.controls.tauxRemise.invalid && Formremise.controls.tauxRemise.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="montantMax">Montant Max</label>
+                        <input type="number" class="form-control" id="montantMax" formControlName="montantMax" required placeholder="montantMax">
+                        <div *ngIf="Formremise.controls.montantMax.invalid && Formremise.controls.montantMax.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                        <div *ngIf="Formremise.errors?.montantRange && Formremise.controls.montantMax.touched" class="text-danger">
+                            Montant Max  must be bigger than Montant Min.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="montantMin">Montant Min</label>
+                        <input type="number" class="form-control" id="montantMin" formControlName="montantMin" required placeholder="montantMin">
+                        <div *ngIf="Formremise.controls.montantMin.invalid && Formremise.controls.montantMin.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                        <div *ngIf="Formremise.errors?.montantRange && Formremise.controls.montantMin.touched" class="text-danger">
+                            Montant Min must be less than Montant Max.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="montantMin">Date Expiration</label>
+                        <input type="date" class="form-control" id="dateExpiration" formControlName="dateExpiration" required >
+                        <div *ngIf="Formremise.controls.dateExpiration.invalid && Formremise.controls.dateExpiration.touched" class="text-danger">
+                            Ce champ est obligatoire
+                        </div>
+                        <div *ngIf=" Formremise.errors?.DateMustBeLaterThanToday &&  Formremise.controls.dateExpiration.touched" class="text-danger">
+                           date expiration must be later then today
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+  
+     
+     
+      <button mat-raised-button class="btn btn-info pull-right" color="primary" [disabled]="Formremise.invalid" (click)="onSubmit()">
+        {{editMode?"Modifier ": "Ajouter"}}
+      </button>
+  
+    </div>
+  

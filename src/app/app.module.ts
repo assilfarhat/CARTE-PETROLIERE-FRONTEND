@@ -67,13 +67,14 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 //import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
 import { LaddaModule } from 'angular2-ladda';
 import { ToasterModule } from 'angular2-toaster';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataFilterPipe } from './pipes/datafilter.pipe';
 import { LoginComponent } from './views/Account/login/login.component';
-import { DataTableModule } from 'angular2-datatable';
+//import { DataTableModule } from 'angular2-datatable';
 import { RecoverPasswordComponent } from './views/Account/recover-password/recover-password.component';
 import { DataTablesModule } from 'angular-datatables';
 import { FabComponent } from './components/fab/fab.component';
@@ -162,6 +163,11 @@ import {MatTreeModule} from '@angular/material/tree';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { DashboardComponent } from './views/Dashboard/dashboard/dashboard.component';
+import { RemiseComponent } from './views/ProgramFidalite/remise/remise.component';
+import { FidaliteComponent } from './views/ProgramFidalite/fidalite/fidalite.component';
+import { ListServiceComponent } from './views/Service/list-service/list-service.component';
+import { AddServiceComponent } from './views/Service/add-service/add-service.component';
+import { AddRemiseComponent } from './views/ProgramFidalite/add-remise/add-remise.component';
 //import { PorteurDetailsComponent } from './views/porteur/porteur-details/porteur-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -171,7 +177,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
     imports: [
-        BrowserModule, DemoMaterialModule,
+        BrowserModule, 
+        DemoMaterialModule,
         NgMultiSelectDropDownModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
@@ -189,10 +196,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         ToasterModule,
         FormsModule,
         HttpClientModule,
-        //DataTableModule,
         ModalModule,
         LaddaModule,
         DataTablesModule,
+        //DataTableModule,
         //MatButtonModule,
         BrowserAnimationsModule,
         DemoMaterialModule,
@@ -208,6 +215,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         ...APP_COMPONENTS,
         ...APP_DIRECTIVES,
         HomeComponent,
+        RemiseComponent,
+        AddRemiseComponent,
+        FidaliteComponent,
+        AddServiceComponent,
         DeclarationTerminalComponent,
         UpdateProfileComponent,
         AddTerminalComponent,
@@ -235,6 +246,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         DateValiditePipe,
         AddTpeComponent,
         ClientAddComponent,
+        ListServiceComponent,
         ClientEditComponent,
         ClientListComponent,
         RechargeClientComponent,

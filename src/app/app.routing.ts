@@ -57,6 +57,11 @@ import { DemandePersComponent } from './views/demande-pers/demande-pers.componen
 import { HistoriqueClientComponent } from './views/historique-client/historique-client.component';
 import { SoldeDepartComponent } from './views/Solde-depart/solde-depart/solde-depart.component';
 import { DashboardComponent } from './views/Dashboard/dashboard/dashboard.component';
+import { FidaliteComponent } from './views/ProgramFidalite/fidalite/fidalite.component';
+import { RemiseComponent } from './views/ProgramFidalite/remise/remise.component';
+import { ListServiceComponent } from './views/Service/list-service/list-service.component';
+import { AddServiceComponent } from './views/Service/add-service/add-service.component';
+import { AddRemiseComponent } from './views/ProgramFidalite/add-remise/add-remise.component';
 
 
 
@@ -113,8 +118,71 @@ export const routes: Routes = [
         title: 'accueil'
       },*/
     children: [
-      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardGuard] },
-    
+      { path: 'dashboard', 
+        component: DashboardComponent, 
+        pathMatch: 'full', 
+        canActivate: [AuthGuardGuard],
+        data: {
+          role: ['ADMIN STAROIL']
+        } 
+    },
+      { path: 'remise', 
+        component: RemiseComponent, 
+        pathMatch: 'full', 
+        canActivate: [AuthGuardGuard],
+        data: {
+          role: ['ADMIN STAROIL']
+        } 
+     },
+     { path: 'remise/add', 
+     component: AddRemiseComponent, 
+     pathMatch: 'full', 
+     canActivate: [AuthGuardGuard],
+     data: {
+       role: ['ADMIN STAROIL']
+     } 
+  },
+      { path: 'remise/add/:id', 
+      component: AddRemiseComponent, 
+      pathMatch: 'full', 
+      canActivate: [AuthGuardGuard],
+      data: {
+        role: ['ADMIN STAROIL']
+      } 
+    },
+      { path: 'fidalite', 
+        component: FidaliteComponent, 
+        pathMatch: 'full', 
+        canActivate: [AuthGuardGuard],
+        data: {
+          role: ['ADMIN STAROIL']
+        } 
+      },
+      { path: 'service',
+        component: ListServiceComponent,
+        pathMatch: 'full', 
+        canActivate: [AuthGuardGuard],
+        data: {
+          role: ['ADMIN STAROIL']
+        }
+      },
+      { path: 'service/add', 
+        component: AddServiceComponent, 
+        pathMatch: 'full',
+        canActivate: [AuthGuardGuard],
+        data: {
+          role: ['ADMIN STAROIL']
+        }
+      },
+      {
+        path: 'service/add/:id',
+        component: AddServiceComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuardGuard],
+        data: {
+          role: ['ADMIN STAROIL']
+        }
+      },
       {
         path: 'home',
         component: HomeComponent,

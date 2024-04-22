@@ -10,6 +10,16 @@ export const navigationEn = [
     icon: 'icon-speedometer',
   },
   {
+    name: 'remise',
+    url: '/remise',
+    icon: 'icon-speedometer',
+  },
+  {
+    name: 'service',
+    url: '/service',
+    icon: 'icon-speedometer',
+  },
+  {
     name : 'Management Of Users',
     url: '',
     icon: 'fa fa-users',

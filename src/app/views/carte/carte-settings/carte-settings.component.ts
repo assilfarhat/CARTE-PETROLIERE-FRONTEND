@@ -139,7 +139,7 @@ export class CarteSettingsComponent implements OnInit {
   // }
 
   createform(model) {
-    //console.log("model1",model)
+    console.log("model1",model)
     this.form = this.fb.group({
       Stations: [[]],
       Stations1: [model.stations1],
@@ -162,6 +162,7 @@ export class CarteSettingsComponent implements OnInit {
       , jours: ''
       , capaciteReservoir: model.capaciteReservoir
       , saisieKlm: model.saisieKlm
+      , progFidalite: model.progFidalite
       , autoriserTransfert: model.autoriserTransfert
       , coutCarte: model.coutCarte
       , soldInitial: model.soldInitial

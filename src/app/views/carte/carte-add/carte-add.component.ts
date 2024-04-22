@@ -155,6 +155,7 @@ export class CarteAddComponent implements OnInit {
         fraisTagCheck: [false,],
         fraisTag: [],
         saisieKlm: [false,],
+        ProgFidalite: [false,],
         flux: [, Validators.required],
       });
       this.groupsForms.insert(0, group)
@@ -168,7 +169,7 @@ export class CarteAddComponent implements OnInit {
   }
 
   save() {
-   // console.log("this.groupsForms.value", this.groupsForms.value);
+    console.log("this.groupsForms.value", this.groupsForms.value);
     if (this.groupsForms.invalid)
       return
 
@@ -199,6 +200,15 @@ export class CarteAddComponent implements OnInit {
     else {
       this.groupsForms.controls[index]['controls'].klm.clearValidators();
       this.groupsForms.controls[index]['controls'].klm.setValue('');
+    }
+  }
+  showProgFidalite(index) {
+    console.log(this.groupsForms.controls[index]['controls'].ProgFidalite.value)
+    if (this.groupsForms.controls[index]['controls'].ProgFidalite.value)
+      this.groupsForms.controls[index]['controls'].ProgFidalite.setValidators(Validators.required)
+    else {
+      this.groupsForms.controls[index]['controls'].ProgFidalite.clearValidators();
+      this.groupsForms.controls[index]['controls'].ProgFidalite.setValue('');
     }
   }
 

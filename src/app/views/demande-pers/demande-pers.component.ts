@@ -176,7 +176,7 @@ export class DemandePersComponent implements OnInit {
       res => {
         this.demandePersCarte = res as []
       this.nomPorteur = this.demandePersCarte.nomPrenom
-       //console.log("this.demandePersCarte",this.demandePersCarte)
+        console.log("this.demandePersCarte",this.demandePersCarte)
         this.DemandeParseModal.show()
       }
     )

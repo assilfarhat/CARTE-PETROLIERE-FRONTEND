@@ -1,0 +1,85 @@
+<div class="animated fadeIn">
+    <div class="animated fadeIn">
+       <div class="row">
+         <div class="col-sm-12">
+           <div class="card">
+             <h5 class="card-title">
+               <div class="card-header"><strong>Gestion des remises</strong></div>
+             </h5>
+            
+             <div class="card-body">
+              <div class="row">
+      
+                <div  class="col-sm-12 text-right">
+                  <a class="btn btn-success btn-ladda" data-style="expand-left" [routerLink]="[ '/remise/add']">
+                    <i class="fa fa-plus"></i> Ajouter
+                  </a>
+                </div>
+              </div>
+               <div style="overflow-x:auto; margin-top: 20px;">
+                 <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover display nowrap"
+                   width="100%">
+                   <thead>
+                    <tr>
+                       
+                       <th>Taux Remise</th>
+                       <th>Montant Max</th>
+                       <th>Montant Min</th>
+                       <th>Date Expiration</th> 
+                       <th >
+                        <i class="icon-pencil" aria-hidden="true"></i>
+                      </th>
+                      <th>
+
+                        <i class="icon-trash"></i>
+                      </th>
+                       <!-- Add more columns as needed -->
+                    </tr>
+                   </thead>
+                   <tbody>
+                    <tr *ngFor="let remise of remises">
+                       
+                        <td>{{ remise.tauxRemise }}</td>
+                        <td>{{ remise.montantMax }}</td>
+                        <td>{{ remise.montantMin }}</td>
+                        <td>{{ remise.dateExpiration | dateSql}}</td>
+                        <td><i  class="icon-pencil" aria-hidden="true"
+                          [routerLink]="['/remise/add', remise.idRemise]"></i>
+                      </td>
+                      
+                      <td>
+                        <i class="icon-trash" title="Supprimer" 
+                          (click)="selectRemise(remise.idRemise); deleteModal.show()"></i>
+                      </td>
+                        <!-- Add more cells as needed -->
+                      </tr>
+                   </tbody>
+                 </table>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+    </div>
+   </div>
+   <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-danger" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Supprimer remise</h4>
+        <button type="button" class="close" (click)="deleteModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûre de vouloir supprimer</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+          (click)="deleteModal.hide()">ANNULER</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">OUI, Supprimer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

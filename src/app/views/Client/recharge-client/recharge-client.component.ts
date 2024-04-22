@@ -3,11 +3,10 @@ import { ClientService } from '../../../services/client.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
 
-import { Component, OnInit, ViewChild, ElementRef, HostListener, Output, HostBinding, EventEmitter } from '@angular/core';
-import { HttpEventType, HttpErrorResponse, HttpEvent } from '@angular/common/http';
-import { DatePipe, DOCUMENT } from '@angular/common';
-import { reverse } from 'dns';
-import { Console } from 'console';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpEventType, HttpEvent } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-recharge-client',
@@ -15,8 +14,8 @@ import { Console } from 'console';
   styleUrls: ['./recharge-client.component.scss']
 })
 export class RechargeClientComponent implements OnInit {
-  @ViewChild('ConfirmRechargeModal') ConfirmRechargeModal;
-  idClient
+  @ViewChild('ConfirmRechargeModal') ConfirmRechargeModal: { show: () => void; hide: () => void; };
+  idClient: any;
   public progress: number;
   public message: string;
   isValid = false;
@@ -44,6 +43,7 @@ export class RechargeClientComponent implements OnInit {
       private fb: FormBuilder, 
       private toasterService: ToasterService, 
       private datePipe: DatePipe,
+      
       ) { }
   RechargeClientForm: any
   fileData: File = null;
@@ -95,7 +95,7 @@ export class RechargeClientComponent implements OnInit {
     //console.log("Raison sociale est " + this.RaisonSociale)
     this.dateString = this.datePipe.transform(new Date(), "yyyy-MM-dd")
     this.idClient = this.route.snapshot.paramMap.get('id')
-    //console.log("hello ! ")
+    console.log("hello ! ")
     this.getClientWithSolde();
     this.RechargeClientForm = this.fb.group({
       "numCompte": "",
@@ -256,7 +256,8 @@ fileChange(event: any) {
   checkfile() {
     //console.log("ddddddddddddddddddddddddddddddddd",this.RechargeClientForm.value);
     
-    // console.log("testmontant", this.RechargeClientForm.value.montant)
+    console.log("testmontant", this.RechargeClientForm.value.montant)
+
     if (((this.RechargeClientForm.value.typePayement == "chèque" || this.RechargeClientForm.value.typePayement == "cheque" ||this.RechargeClientForm.value.typePayement == "traite" ) && this.file == null))
      {
     //  console.log("testmontant" , this.RechargeClientForm.value.typePayement)
@@ -307,7 +308,7 @@ fileChange(event: any) {
     this.blocked = true
     this.confirmFlag = event
     //console.log("test test1")
-    //mochkel houni
+    //mochkel hna
     // this.clientService.DemandeRecharge(this.RechargeClientForm.getRawValue()).subscribe(
     //   (res: any) => {
     //     setTimeout(() => {
@@ -420,7 +421,7 @@ fileChange(event: any) {
     this.statusPP = client.statusPP == "0" ? false : true
     this.statusPPE = client.statusPPE == "0" ? false : true
     this.statusPsP = client.statusPsP == "0" ? false : true
-    //console.log(client)
+    console.log(client)
     this.joursPourEcheance = client.echeance
     this.RechargeClientForm.patchValue(
       {

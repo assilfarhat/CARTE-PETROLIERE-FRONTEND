@@ -20,6 +20,24 @@ export const navigation = [
   },
   {
 
+    name: 'service',
+
+    url: '/service',
+
+    icon: 'fa fa-home',
+
+  },
+  {
+
+    name: 'remise',
+
+    url: '/remise',
+
+    icon: 'fa fa-home',
+
+  },
+  {
+
     name: "Gestion d'accès",
     url: '/manage-access',
 

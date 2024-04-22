@@ -36,6 +36,7 @@ export class ClientHistoriqueRechargeComponent implements OnInit {
   progress: number;
   recharge: any;
   dateString: string;
+  dateString1: string;
   isDownloading: boolean;
   renisialiser: boolean;
   recherageNonConfirme: any;
@@ -105,13 +106,17 @@ this.accessannulation = this.access[0].valueAccessView
     this.route.queryParams.subscribe((params) => {
       this.params = params
     });
-   // console.log('test idClient2', this.withParameter)
-
+    console.log('params ', this.params['dateFin'] )
+    
+    const currentYear = new Date().getFullYear();
+    const firstDayOfYear = new Date(currentYear, 0, 1); // Note: Months are 0-indexed in JavaScript
+    this.dateString1 = this.datePipe.transform(firstDayOfYear, "yyyy-MM-dd");
+    console.log('dateString1 ', this.dateString1 )
     this.dateString = this.datePipe.transform(new Date(), "yyyy-MM-dd")
     this.form = this.fb.group({
       clientId: [(this.withParameter ? this.idClient : (this.params['clientId'] == undefined ? '' : this.params['clientId']))],
-      dateFin: [this.dateString],
-      dateDebut: [this.dateString],
+      dateFin: [this.params['dateFin'] == undefined ? this.dateString : this.params['dateFin']],
+      dateDebut: [this.params['dateDebut'] == undefined ? this.dateString1 : this.params['dateDebut']],
       status: [this.params['status'] == undefined ? '' : this.params['status']],
       typeCompte: [this.params['typeCompte'] == undefined ? '' : this.params['typeCompte']],
       typePayement: [this.params['typePayement'] == undefined ? '' : this.params['typePayement']],
@@ -277,11 +282,12 @@ this.AnnulerRechargeClientModal.show()
         // "reference":""
       }
     });
+    console.log("dateDebut",  this.form.value.dateDebut )
     
-    filtre.dateDebut = this.form.value.dateDebut.replace(/-/g, '') + '000000000' ? this.form.value.dateDebut.replace(/-/g, '') + '000000000' : '10000101000000000';
-    filtre.dateFin = this.form.value.dateFin.replace(/-/g, '') + '235959999' ? this.form.value.dateFin.replace(/-/g, '') + '235959999' : '99990101235959999';
+    filtre.dateDebut = this.form.value.dateDebut.replace(/-/g, '') + '000000000' ? this.form.value.dateDebut.replace(/-/g, '') + '000000000' : null;
+    filtre.dateFin = this.form.value.dateFin.replace(/-/g, '') + '235959999' ? this.form.value.dateFin.replace(/-/g, '') + '235959999' : null;
 
-    //console.log("hhhhhhhhhhh", filtre);
+    console.log("hhhhhhhhhhh", filtre);
 
     this.clientService.GetRechargeClient(filtre).subscribe(
       (res: any) => {
