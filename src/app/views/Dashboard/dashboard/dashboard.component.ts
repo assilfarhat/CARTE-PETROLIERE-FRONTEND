@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { DashboardService } from './../../../services/dashboard.service';
+import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { DatePipe } from '@angular/common';
+import { SuiviTransactionsService } from 'app/services/suivi-transactions.service';
+import { ToasterService } from 'angular2-toaster';
+import { AmountpipePipe } from 'app/pipes/amountpipe.pipe';
+import { AmountmillierpipePipeVirgule } from 'app/pipes/amountmillierpipeVirgule.pipe';
 
 @Component({
   selector: 'dashboard',
@@ -47,6 +53,24 @@ export class DashboardComponent {
       ];
     })
   );
+ 
+  stat : any = [];
+  constructor(private breakpointObserver: BreakpointObserver,
+     private datePipe: DatePipe, private toasterService: ToasterService, private amountpipePipe: AmountpipePipe, 
+     private DashboardService : DashboardService,private amountmillierpipeVirgule: AmountmillierpipePipeVirgule) {}
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  ngOnInit(){
+   
+    this.getTransactionStat();
+  }
+   
+   getTransactionStat(){
+    this.DashboardService.transactionstat().subscribe(res =>{
+    
+      this.stat = res ;
+      console.log("stat",this.stat)
+    })
+   }
+
+
 }
