@@ -1,0 +1,63 @@
+<div class="container-fluid">
+ 
+    <div class="card">
+    <div class="card-body">
+    <form class="form-horizontal" [formGroup]="form">
+    <h2 class="text-center mb-5">{{'UPDATEPASSWORD.MESSAGE'|translate}}</h2>
+    <p class="text-muted">{{'UPDATEPASSWORD.MESSAGE'|translate}}</p>
+    <div *ngIf="hasError" class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
+    <!-- input password  -->
+  
+  
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+      </div>
+      <input type="password" class="form-control" formControlName="NewPassword"
+        placeholder="{{'UPDATEPASSWORD.NEW'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.NewPassword.errors }">
+      <div *ngIf="submitted && f.NewPassword.errors" class="invalid-feedback">
+        <div *ngIf="f.NewPassword.errors.required">{{'UPDATEPASSWORD.PSWDREQ'|translate}}</div>
+        <div *ngIf="f.NewPassword.errors.minlength">{{'LOGIN.PSWDERRUR'|translate}}</div>
+        <div *ngIf="f.NewPassword.errors.pattern">{{'UPDATEPASSWORD.PSWDERR'|translate}}</div>
+      </div>
+    </div>
+    <!-- Confirm password -->
+    <div class="input-group mb-4">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><i class="fa fa-lock"></i></span>
+      </div>
+      <input type="password" class="form-control" formControlName="confirm"
+        placeholder="{{'UPDATEPASSWORD.NEW2'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.confirm.errors }">
+      <div *ngIf="submitted && f.confirm.errors" class="invalid-feedback">
+        <div *ngIf="f.confirm.errors.required">{{'UPDATEPASSWORD.CONFIRM'|translate}}</div>
+        <div *ngIf="f.confirm.errors.mustMatch">{{'UPDATEPASSWORD.CONFIRMERR'|translate}}</div>
+      </div>
+  
+  
+    </div>
+    <div align="right">
+      <button class="btn btn-outline-success" (click)="toggleChildrenVisibility()"> {{ 'UPDATEPASSWORD.UPDATE' | translate }} </button>
+    </div>
+  
+  
+  </form>
+  </div>
+  <br>
+  
+  
+  <div *ngIf="this.isModalOpen">
+    <div class="modal-body">
+      <p class="text-muted" style="padding: 5px;">  Êtes-vous sûr de vouloir modifier le mot de passe? </p>
+    </div>
+    
+    <div align="center">
+      <button type="button" class="btn btn-secondary" mat-dialog-close> {{'LISTU.ANNULER'|translate}}</button>  &nbsp;
+      <button type="button" class="btn btn-primary" (click)="changePass()"  mat-dialog-close> Confirmer</button>
+    </div>
+  <br>
+    
+  </div>
+  </div>
+  </div>

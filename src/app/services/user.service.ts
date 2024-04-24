@@ -9,7 +9,9 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-
+  updatePassword(id:any,params:any){
+    return this.http.post(environment.api_url+'/api/Account/UpdatePassword/'+id,params);
+  }
   getListRoles() {
     return this.http.get(environment.api_url + '/api/Account/Roles');
   }

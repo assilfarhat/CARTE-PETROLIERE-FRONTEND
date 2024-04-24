@@ -62,6 +62,12 @@
 
 
               </th>
+              <th>
+                <i class="icon-pencil"></i>
+
+
+
+              </th>
             </tr>
           </thead>
 
@@ -97,6 +103,11 @@
                   (click)="selectUser(item.id); deleteModal.show()"></i>
               </td>
               <td><i class="icon-pencil" title="Modifier" (click)="selectUser(item.id); updateModal.show()"></i></td>
+
+              <td>
+                <i class="fa fa-repeat" title="{{'LISTU.UPDATEM' |translate}}"
+              (click)="selectUser(item.id);changePass()"></i></td>
+
             </tr>
           </tbody>
 

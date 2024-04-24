@@ -7,6 +7,8 @@ import { ToasterService } from 'angular2-toaster';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ReinstalisationPassComponent } from '../reinstalisation-pass/reinstalisation-pass.component';
 
 
 @Component({
@@ -32,7 +34,7 @@ export class ListUsersComponent implements OnInit {
   form: FormGroup;
   filterQuery = '';
   lang:any;
-  constructor(private translateService: TranslateService,private router: Router,
+  constructor(public dialog : MatDialog, private translateService: TranslateService,private router: Router,
     private userService : UserService,private tokenService : TokenService, private toasterService: ToasterService,private fb: FormBuilder) {
 
      }
@@ -199,6 +201,22 @@ export class ListUsersComponent implements OnInit {
     )
 
   }
+
+  changePass( ) {
+
+
+    var dialogRef = this.dialog.open(ReinstalisationPassComponent, {
+      data: { name:this.selectedUser.id }
+    })
+    dialogRef.afterClosed().subscribe(
+      async data => {
+       
+       
+       
+      }
+    )
+  }
+
   updateUser() {
     this.submitted = true;
     this.updateModal.hide();

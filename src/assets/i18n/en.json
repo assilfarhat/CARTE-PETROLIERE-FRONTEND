@@ -122,7 +122,8 @@
         "ACTIVATEMESSAGE2": "Are you sure  to desactivate {{username}}",
         "ACTIVATEMESSAGE3": "Are you sure  to activate {{username}}",
         "UPDATEMESSAGE": "Update user",
-        "UPDATE": "Update"
+        "UPDATE": "Update",
+        "UPDATEM": "Update password"
     },
     "ORG": {
         "MESSAGE": "Add Organization",

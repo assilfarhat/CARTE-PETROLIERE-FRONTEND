@@ -168,6 +168,8 @@ import { FidaliteComponent } from './views/ProgramFidalite/fidalite/fidalite.com
 import { ListServiceComponent } from './views/Service/list-service/list-service.component';
 import { AddServiceComponent } from './views/Service/add-service/add-service.component';
 import { AddRemiseComponent } from './views/ProgramFidalite/add-remise/add-remise.component';
+import { ReinstalisationPassComponent } from './views/manageUsers/reinstalisation-pass/reinstalisation-pass.component';
+import { ChangePasswordComponent } from './views/Account/change-password/change-password.component';
 //import { PorteurDetailsComponent } from './views/porteur/porteur-details/porteur-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -215,6 +217,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         ...APP_COMPONENTS,
         ...APP_DIRECTIVES,
         HomeComponent,
+        ReinstalisationPassComponent,
+        ChangePasswordComponent,
         RemiseComponent,
         AddRemiseComponent,
         FidaliteComponent,

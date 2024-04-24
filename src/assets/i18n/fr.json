@@ -122,7 +122,10 @@
         "ACTIVATEMESSAGE2": "Êtes-vous sûre de vouloir désactiver l'utilisateur {{username}}",
         "ACTIVATEMESSAGE3": "Êtes-vous sûre de vouloir activer l'utilisateur {{username}}",
         "UPDATEMESSAGE": "Modifier un utilisateur",
-        "UPDATE": "Modifier"
+        "UPDATE": "Modifier",
+        "UPDATEM": "modifier mot de passe"
+        
+
     },
     "ORG": {
         "MESSAGE": "Ajouter un nouvel organisme",
