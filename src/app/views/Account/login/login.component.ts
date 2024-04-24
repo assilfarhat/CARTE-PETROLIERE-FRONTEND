@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthServiceService } from 'app/services/auth-service.service';
 import { TokenService } from 'app/services/token.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private authService:AuthServiceService,
-    private tokensService:TokenService, public translate:TranslateService
+    private tokensService:TokenService, public translate:TranslateService,
+    public dialog : MatDialog
      ) {
       translate.addLangs(['en','fr'])
       this.langSelected=this.tokensService.getLang();
@@ -64,6 +67,20 @@ export class LoginComponent implements OnInit {
         }
     this.authService.authenticate(this.form.value).subscribe(
       (res) => {
+
+        if(res.infos =='Change your Password'){
+
+         // console.log("usernameinlogin",this.form.value.userName)
+          var dialogRef = this.dialog.open(ChangePasswordComponent, {
+            data: { name:this.form.value.userName }
+          })
+          dialogRef.afterClosed().subscribe(
+            async data => {
+             
+             
+            }
+          )
+        }
 
         this.tokensService.setToken({ access_token: res['token'], expiration: res['expiration']},this.form.get('remember_me').value);
         this.tokensService.setOrgnaisation(res['organization'] );

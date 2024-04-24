@@ -12,6 +12,10 @@ export class UserService {
   updatePassword(id:any,params:any){
     return this.http.post(environment.api_url+'/api/Account/UpdatePassword/'+id,params);
   }
+
+  UpdatePasswordOnlogin(name:any,params:any){
+    return this.http.post(environment.api_url+'/api/Account/UpdatePasswordOnlogin/'+name,params);
+  }
   getListRoles() {
     return this.http.get(environment.api_url + '/api/Account/Roles');
   }
