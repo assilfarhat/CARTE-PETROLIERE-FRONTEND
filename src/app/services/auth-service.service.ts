@@ -19,6 +19,7 @@ export class AuthServiceService {
   }
 
   public get currentUserValue(): Utilisateur {
+  
     return this.currentUserSubject.value;
   }
   public get currentUserDefaultUrl(): string {

@@ -31,8 +31,7 @@
               "node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css"
             ],
             "scripts": [
-              "node_modules/chart.js/dist/Chart.bundle.min.js",
-              "node_modules/chart.js/dist/Chart.min.js",
+             
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
               "node_modules/jszip/dist/jszip.js",
@@ -93,8 +92,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [
-              "node_modules/chart.js/dist/Chart.bundle.min.js",
-              "node_modules/chart.js/dist/Chart.min.js",
+             
               "./node_modules/jquery/dist/jquery.js",
               "./node_modules/signalr/jquery.signalR.js"
             ],
@@ -127,7 +125,7 @@
       }
     }
   },
-  "defaultProject": "@coreuipro/angular",
+
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

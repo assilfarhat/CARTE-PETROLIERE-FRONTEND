@@ -24,13 +24,13 @@ export class NotificationHubService {
       .build();
 
       this.connection.start().then(() => {
-        //console.log('Hub connection started')
+        console.log('Hub connection started notif')
         this.connectionEstablished.next(true);
       }).catch(err => console.log(err));
 
 
       this.connection.on('GetNotifications', (notifications) => {
-        //console.log('Received', notifications);
+        console.log('Received notif', notifications);
         this.notifications.next(notifications);
       });
      }
