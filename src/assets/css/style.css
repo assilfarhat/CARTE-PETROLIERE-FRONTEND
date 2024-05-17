@@ -489,13 +489,7 @@ h6 {
   font-weight: 600;
 }
 
-.header-nav .badge-number {
-  position: absolute;
-  inset: -2px -5px auto auto;
-  font-weight: normal;
-  font-size: 12px;
-  padding: 3px 6px;
-}
+
 
 .header-nav .notifications {
   inset: 8px -15px auto auto !important;
@@ -864,16 +858,7 @@ h6 {
   background-color: #eceefe;
 }
 
-.dashboard .activity .activity-item .activity-badge {
-  margin-top: 3px;
-  z-index: 1;
-  font-size: 11px;
-  line-height: 0;
-  border-radius: 50%;
-  flex-shrink: 0;
-  border: 3px solid #fff;
-  flex-grow: 0;
-}
+
 
 .dashboard .activity .activity-item .activity-content {
   padding-left: 10px;
@@ -957,6 +942,7 @@ h6 {
 
 .dashboard .top-selling .table tbody td {
   vertical-align: middle;
+  font-size: 1rem;
 }
 
 .dashboard .top-selling img {

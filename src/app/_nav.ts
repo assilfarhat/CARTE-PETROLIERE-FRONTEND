@@ -15,25 +15,25 @@ export const navigation = [
 
     url: '/dashboard',
 
-    icon: 'fa fa-home',
+    icon: 'fa fa-th-large',
 
   },
   {
 
-    name: 'service',
+    name: 'Gestion des services',
 
     url: '/service',
 
-    icon: 'fa fa-home',
+    icon: 'fa fa-list',
 
   },
   {
 
-    name: 'remise',
+    name: 'Gestion des remises',
 
     url: '/remise',
 
-    icon: 'fa fa-home',
+    icon: 'fa fa-percent',
 
   },
   {

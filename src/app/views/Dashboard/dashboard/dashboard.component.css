@@ -1,0 +1,15 @@
+/* Increase the size of the badge */
+.badge {
+    font-size: 1rem; /* Adjust the size as needed */
+    padding: 0.05rem 0.25rem; /* Adjust padding for size */
+    border-radius: 0.25rem; /* Adjust the border-radius as needed */
+}
+
+/* Change the background color to be more opaque */
+.badge.bg-info {
+    background-color: rgba(54, 143, 128, 0.966); /* Adjust the opacity as needed */
+    color: rgb(255, 255, 255); /* Darker text for better contrast */
+    border-radius: 0.25rem; /* Ensure the border-radius is consistent */
+}
+
+  

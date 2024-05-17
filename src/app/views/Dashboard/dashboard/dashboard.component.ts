@@ -7,6 +7,9 @@ import { ToasterService } from 'angular2-toaster';
 import { AmountpipePipe } from 'app/pipes/amountpipe.pipe';
 import { AmountmillierpipePipeVirgule } from 'app/pipes/amountmillierpipeVirgule.pipe';
 import { Chart } from 'chart.js/auto';
+import { ProgramFidaliteService } from 'app/services/program-fidalite.service';
+import { Remise } from 'app/Model/Remise';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'dashboard',
@@ -60,27 +63,41 @@ export class DashboardComponent {
   months : any =[];
   successData : any =[];
   failData : any =[];
+  ListRemise : Remise[] = [];
+  updateSubscription: Subscription;
   constructor(private breakpointObserver: BreakpointObserver,
      private datePipe: DatePipe, private toasterService: ToasterService, private amountpipePipe: AmountpipePipe, 
+     private programFidaliteService: ProgramFidaliteService,
      private DashboardService : DashboardService,private amountmillierpipeVirgule: AmountmillierpipePipeVirgule) {}
 
   async ngOnInit(){
     this.cardscount();
     this.rechargescount();
+
     this.DashboardService.cardStatusUpdate.subscribe(({ activeCount, blockedCount }) => {
       // Update your component's state with the new counts
      
       this.activecards = activeCount;
       this.blockedcards = blockedCount;
 
-      console.log(`dash Active Cards : ${this.activecards}, dash Blocked Cards: ${  this.blockedcards}`);
+     // console.log(`dash Active Cards : ${this.activecards}, dash Blocked Cards: ${  this.blockedcards}`);
     });
     this.DashboardService.rechargeUpdate.subscribe(({rechargeconfirme,rechargeannule}) => {
       this.rechargeconfirme = rechargeconfirme;
       this.rechargeannule = rechargeannule;
-      console.log(`rechargecount : ${this.rechargeconfirme}`);
+    //  console.log(`rechargecount : ${this.rechargeconfirme}`);
     });
-    
+    this.getListRemise();
+    // In your component
+    this.DashboardService.remiseUpdate.subscribe((data: { remises: Remise[] }) => {
+    // Directly use the remises data
+    console.log("1",typeof data);
+    console.log("2",typeof data.remises);
+    this.ListRemise = data.remises;
+    console.log(`ListRemise comp: :  ${JSON.stringify(this.ListRemise)}`);
+  });
+  this.updateSubscription = interval(5000).subscribe(
+    (val) => { this.transactionstat() });
     this.createChart();
   }
 
@@ -91,15 +108,35 @@ export class DashboardComponent {
     const monthIndex = parseInt(monthNumber, 10) - 1;
     return monthNames[monthIndex];
   }
-  createChart(){
-   this.DashboardService.transactionstat().subscribe(res => {
+  transactionstat(){
+    this.DashboardService.transactionstat().subscribe(res => {
 
       this.stat = res;
-     console.log("stat", this.stat.resultByMonth);
+      //console.log("stat interval:", this.stat.resultByMonth);
       this.months = this.stat.resultByMonth.map(item => this.getMonthName(item.month));
       this.successData = this.stat.resultByMonth.map(item => item.nbrSucess);
       this.failData = this.stat.resultByMonth.map(item => item.nbrFail);
-      console.log("months1",this.months)
+      if (this.chart) {
+        this.chart.data.labels = this.months;
+        this.chart.data.datasets[0].data = this.successData;
+        this.chart.data.datasets[1].data = this.failData;
+        this.chart.update();
+      }
+       
+      });
+  
+   
+  }
+  createChart(){
+    
+   this.DashboardService.transactionstat().subscribe(res => {
+
+      this.stat = res;
+   //  console.log("stat", this.stat.resultByMonth);
+      this.months = this.stat.resultByMonth.map(item => this.getMonthName(item.month));
+      this.successData = this.stat.resultByMonth.map(item => item.nbrSucess);
+      this.failData = this.stat.resultByMonth.map(item => item.nbrFail);
+   //   console.log("months1",this.months)
       let delayed;
       this.chart = new Chart("MyChart", {
         type: 'bar',
@@ -149,7 +186,7 @@ export class DashboardComponent {
   cardscount(){
   this.DashboardService.cardscount().subscribe(res =>{
     this.data  = res;
-    console.log("resultat",res)
+   // console.log("resultat",res)
     this.activecards = this.data.activeCount;
     this.blockedcards = this.data.blockedCount;
     
@@ -159,12 +196,27 @@ export class DashboardComponent {
   rechargescount(){
     this.DashboardService.rechagecount().subscribe(res =>{
       this.data = res
-      console.log("rechargetscount",res)
+     // console.log("rechargetscount",res)
       this.rechargeconfirme = this.data.rechargeconfirme;
       this.rechargeannule = this.data.rechargeannule;
       
       
       
     });
+  }
+
+  getListRemise() {
+    this.programFidaliteService.getAllRemises()
+      .subscribe((resp: any) => {
+       
+        this.ListRemise = resp as []
+        console.log("programFidaliteService:",this.ListRemise)
+     
+      },
+        (err) => {
+         
+
+        }
+      );
   }
 }

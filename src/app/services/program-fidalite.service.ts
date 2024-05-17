@@ -33,11 +33,12 @@ generateBonachat(numCarte: string): Observable<any> {
     return this.http.post(`${environment.api_url}/api/Remise/addRemise`, remise);
  }
 
- updateRemise(id: number, remise: any): Observable<any> {
-    return this.http.put(`${environment.api_url}/api/Remise/putremise/${id}`, remise);
+ updateRemise(id: any, remise: any){
+    return this.http.put(environment.api_url +'/api/Remise/putremise/'+id, remise);
  }
 
- deleteRemise(id: number): Observable<any> {
-    return this.http.delete(`${environment.api_url}/api/Remise/delete/${id}`);
+
+ deleteRemise(id: any) {
+   return this.http.delete(environment.api_url + '/api/Remise/delete/' + id);
  }
 }

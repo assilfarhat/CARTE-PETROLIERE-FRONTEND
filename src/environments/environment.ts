@@ -6,9 +6,11 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:57660',
+ //api_url: location.origin + '/Acil',
   //api_url: 'http://localhost:5000',
   //api_url: 'https://213.150.169.94:3443/WSPortailStarOil',
   MaxRetraitAlimentation : 9999999999,
   MinRetraitAlimentation: 1000,
   sessionTime: 15
 };
+

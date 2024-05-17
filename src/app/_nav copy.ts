@@ -15,7 +15,7 @@ export const navigation = [
 
     url: '/dashboard',
 
-    icon: 'icon-speedometer',
+    icon: 'icon-grid',
 
   },
   {
