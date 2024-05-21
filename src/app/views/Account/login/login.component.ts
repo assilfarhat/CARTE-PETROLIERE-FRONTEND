@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  hide = true;
   form: FormGroup;
   submitted = false;
   hasError = false;
@@ -52,7 +52,13 @@ export class LoginComponent implements OnInit {
         remember_me:['']
       })
     }
-
+    togglePasswordVisibility(): void {
+      this.hide =!this.hide;
+      const passwordInput = document.querySelector('input[type="password"]') as HTMLInputElement;
+      if (passwordInput) {
+        passwordInput.type = this.hide? 'text' : 'password';
+      }
+    }
     switch(){
 
       this.showLang=!this.showLang

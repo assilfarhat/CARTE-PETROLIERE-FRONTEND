@@ -16,7 +16,7 @@
          
 
               <div class="card-body">
-                <h5 class="card-title">Successful Recharge </h5>
+                <h5 class="card-title">Recharge réussie </h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -38,7 +38,7 @@
          
 
               <div class="card-body">
-                <h5 class="card-title">Failed Recharge </h5>
+                <h5 class="card-title">Recharge échouée </h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -61,7 +61,7 @@
               
 
               <div class="card-body">
-                <h5 class="card-title">Active cards </h5>
+                <h5 class="card-title">Cartes actives </h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -84,7 +84,7 @@
 
               
               <div class="card-body">
-                <h5 class="card-title">Blocked Cards </h5>
+                <h5 class="card-title">Cartes bloquées </h5>
 
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -107,7 +107,7 @@
 
                 
               <div class="card-body">
-                <h5 class="card-title">Transaction history </h5>
+                <h5 class="card-title">Aperçu mensuel des taux de succès et d'échec des transactions  </h5>
 
                 <div class="chart-container " style="position: relative; height:50vh">
                     <canvas  id="MyChart" >{{ chart }}</canvas>
@@ -126,7 +126,7 @@
            
 
               <div class="card-body">
-                <h5 class="card-title">Recent Promotions <span>| Today</span></h5>
+                <h5 class="card-title">Promotions récentes <span>| Aujourd'hui</span></h5>
 
                 <table class="table table-borderless datatable">
                   <thead>
@@ -136,17 +136,31 @@
                       <th scope="col">Montant Max</th>
                       <th scope="col">Taux Remise</th>
                       <th scope="col">Date Expiration</th>
+                      <th>
+
+                        <i class="icon-trash"></i>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr  *ngFor="let remise of ListRemise">
-                      <th scope="row"><a>#{{ remise.idRemise }}</a></th>
-                      <td>{{ remise.montantMax }}</td>
-                      <td>{{ remise.montantMin }}</td>
-                     
-                      <td><a  class="text-primary">{{ remise.tauxRemise }}</a></td>
-                      <td><span class="badge bg-info">{{ remise.dateExpiration | dateSql}}</span></td>
-                    </tr>
+                    <ng-container *ngIf="ListRemise.length > 0">
+                      <tr  *ngFor="let remise of ListRemise">
+                        <th scope="row"><a>#{{ remise.idRemise }}</a></th>
+                        <td>{{ remise.montantMax }}</td>
+                        <td>{{ remise.montantMin }}</td>
+                       
+                        <td><a  class="text-primary">{{ remise.tauxRemise }}</a></td>
+                        <td><span class="badge bg-info">{{ remise.dateExpiration | dateSql}}</span></td>
+                        <td>
+                          <i class="icon-trash" title="Supprimer" 
+                            (click)="selectRemise(remise.idRemise); deleteModal.show()"></i>
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <tr *ngIf="ListRemise.length === 0">
+                      <td colspan="8" class="text-center">Aucune promotion aujourd'hui.</td>
+                  </tr>
+                  
                   </tbody>
                 </table>
 
@@ -162,56 +176,216 @@
               
 
               <div class="card-body pb-0">
-                <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                <h5 class="card-title">Demande des cartes <span>| Aujourd'hui</span>
+                </h5>
 
-                <table class="table table-borderless">
+                <table class="table table-borderless datatable">
                   <thead>
-                    <tr>
-                      <th scope="col">Preview</th>
-                      <th scope="col">Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Sold</th>
-                      <th scope="col">Revenue</th>
-                    </tr>
+                      <tr>
+                          <td style="margin-top: 5px;" *ngIf="ValidationCarte === 'Validation carte' && accessValidationCarte == true"><i title="Confirmation de la demande " class="fa fa-check-square" aria-hidden="true"></i></td>
+                          <th scope="col">Statut</th>
+                          <th scope="col">Nombre des porteurs</th>
+                          <th scope="col">Code client</th>
+                          <th scope="col">Client</th>
+                          <th scope="col">Créateur</th>
+                          <th scope="col">Date création</th>      
+                          <th scope="col">Fiche suivi d'état</th>
+                      </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                      <td>$64</td>
-                      <td class="fw-bold">124</td>
-                      <td>$5,828</td>
+                    <!-- Conditionally render the entire block if there are items in DemandePersList -->
+                    <ng-container *ngIf="DemandePersList.length > 0">
+                        <!-- Iterate over DemandePersList and create a row for each item -->
+                        <tr *ngFor="let item of DemandePersList">
+                            <td *ngIf="ValidationCarte === 'Validation carte' && accessValidationCarte == true">
+                                <i title="Confirmation de la demande " (click)="selectdemande(item);getCarteByDemande();" class="fa fa-check-square" aria-hidden="true"></i>
+                            </td>
+                            <td class="text-error">{{item.statut=="0"? 'demandée' :(item.statut=="1"? 'acceptée' : (item.statut=="2"? 'rejetée' : '-') ) }}</td>
+                            <td align="center">{{item.totalWordsInNomPorteur}}</td>
+                            <td>{{item.codeClient}}</td>
+                            <td>{{item.raisonSociale}}</td>
+                            <td>{{item.createur}}</td>
+                            <td>{{item.dateCreation | dateSql }}</td>
+                            <td align="center">
+                                <i class="fa fa-download"  (click)="downlaod(item);" aria-hidden="true"></i>                         
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <!-- Display a message when the list is empty -->
+                    <tr *ngIf="DemandePersList.length === 0">
+                        <td colspan="8" class="text-center">Il n'y a pas de demandes de cartes en attente.</td>
                     </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                      <td>$46</td>
-                      <td class="fw-bold">98</td>
-                      <td>$4,508</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                      <td>$59</td>
-                      <td class="fw-bold">74</td>
-                      <td>$4,366</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                      <td>$32</td>
-                      <td class="fw-bold">63</td>
-                      <td>$2,016</td>
-                    </tr>
-                    <tr>
-                      <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                      <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                      <td>$79</td>
-                      <td class="fw-bold">41</td>
-                      <td>$3,239</td>
-                    </tr>
+                </tbody>
+                
+              </table>
+              
+            <div class="container" id="iDdIV28" hidden="true">
+              <div class="row">
+                  <div class="col-xl-3 col-md-3">
+                      <img src="assets/img/logo-symbol.png">
+                  </div>
+  
+                  <div>
+                      <div style="align-self: center;">
+                          <h2>Fiche de suivi création carte pétrolière</h2>
+                      </div>
+                  </div>
+                  <!-- <div class="col-xl-3 col-md-4">
+              <div style="align-self: center; float: right;">
+                  <h4>Edité le: :{{ selectedNote?.date  |dateSql}}</h4>
+              </div>
+          </div> -->
+              </div>
+  
+              <br>
+              <br>
+  
+              <div class="col-xl-3 col-md-6" style="float: right;">
+                  <table>
+                      <tr>
+                          <td>Client : {{ SelectedNameClient }}</td>
+                      </tr>
+                      <tr>
+                          <td>Compte facturation : {{ SelectedIdClient }}</td>
+                      </tr>
+                  </table>
+              </div>
+  
+              <br>
+              <br>
+              <br>
+              <br>
+  
+  
+              <table width="100%" style="border:none">
+                  <thead style="border:none">
+                      <tr style="border:none !important">
+                          <td style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none ">
+                              <strong>N°carte</strong>
+                          </td>
+                          <td style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none ">
+                              <strong>Type carte</strong>
+                          </td>
+                          <td style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none ">
+                              <strong>Date création</strong>
+                          </td>
+                          <td style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none ">
+                              <strong>Date expiration</strong>
+                          </td>
+                          <td style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none ">
+                              <strong>Nom porteur</strong>
+                          </td>
+                      </tr>
+                  </thead>
+  
+                  <tbody style="border:none">
+                      <tr *ngFor="let item of ListdetailCarte">
+                          <td style="border-bottom:none ; border-left:none; border-right:none;border-top:none ">
+                              {{item.numCarte}}
+                          </td>
+                          <td style="border-bottom:none  ; border-left:none; border-right:none;border-top:none ">
+                              {{item.typeCarte}}
+                          </td>
+                          <td style="border-bottom:none  ; border-left:none; border-right:none;border-top:none ">
+                              {{item.dateCreation | dateSql}}
+                          </td>
+                          <td style="border-bottom:none ; border-left:none; border-right:none;border-top:none ">
+                              {{ item.dateValidite }}
+                          </td>
+                          <td style="border-bottom: none  ; border-left:none; border-right:none;border-top:none ">
+                              {{item.nom}}
+                          </td>
+  
+                      </tr>
                   </tbody>
-                </table>
+                  <tfoot style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none ">
+                      <td style="border-bottom: 1px solid  ; border-left:none; border-right:none;border-top:none "></td>
+                  </tfoot>
+              </table>
+  
+  
+  
+              <div class="col-xl-3 col-md-6" style="float: left;">
+                  Total :
+              </div>
+  
+              <br>
+              <br>
+              <div style="overflow-x:auto; margin-top: 40px;">
+                  <table>
+                      <thead style="text-align: center;">
+                          <tr>
+                              <th> </th>
+                              <th>Création </th>
+                              <th>Validation et personnalisation </th>
+                              <th>Demande activation</th>
+                              <th>Activation</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <!-- <tr *ngFor="let item of ListSuiviCarte2"> -->
+                          <tr>
+                              <td>Date</td>
+                              <td> {{ DetailEnteteCarte.dateCreation |dateSql}}</td>
+                              <td> {{ DetailEnteteCarte.dateValidation |dateSql }}</td>
+                              <td> {{ DetailEnteteCarte.dateUserDmdActivation |dateSql}}</td>
+                              <td> {{ DetailEnteteCarte.dateActivation |dateSql }}</td>
+                          </tr>
+                          <tr>
+                              <td>Nom & Prénom</td>
+                              <td> {{ DetailEnteteCarte.createur }}</td>
+                              <td> {{ DetailEnteteCarte.validateur }}</td>
+                              <td> {{ DetailEnteteCarte.userDmdActivation }}</td>
+                              <td> {{ DetailEnteteCarte.userActivation }}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <br>
+              <br>
+              <div class="col-xl-3 col-md-6" style="float: left;">
+                  <table>
+                      <tbody>
+                          <tr>
+                              <td>Espace réservé au client &nbsp;&nbsp; </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+  
+              <br>
+              <br>
+  
+              <div class="col-xl-3 col-md-6" style="float: left;">
+                  Je déclare avoir reçu le/les carte(s) pérolière(s)
+              </div>
+  
+              <br>
+              <br>
+  
+              <div class="col-xl-3 col-md-6" style="float: left;">
+                  <table style="text-align: center;">
+                      <tr>
+                          <td>Date</td>
+                          <td>Nom et Prénom </td>
+                          <td>Signature et caché </td>
+                      </tr>
+                      <tr>
+                          <td>
+                              <br>
+                              <br>
+                              <br>
+                              <br>
+                          </td>
+                          <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                              &nbsp;&nbsp; </td>
+                          <td>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                              &nbsp;&nbsp; </td>
+                      </tr>
+                  </table>
+              </div>
+  
+          </div>
 
               </div>
 
@@ -224,3 +398,24 @@
 
    
   </section>
+  <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-danger" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Supprimer remise</h4>
+        <button type="button" class="close" (click)="deleteModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Êtes-vous sûre de vouloir supprimer</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+          (click)="deleteModal.hide()">ANNULER</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">OUI, Supprimer</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

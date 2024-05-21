@@ -1,5 +1,5 @@
 export class Remise {
-    IdRemise: number;
+    idRemise: number;
     MontantMin: number;
     MontantMax: number;
     TauxRemise: number;

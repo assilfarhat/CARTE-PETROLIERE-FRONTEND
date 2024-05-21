@@ -140,30 +140,7 @@ export class DemandePersComponent implements OnInit {
     this.AnnulerRechargeModal.show()
   }
 
-  // AnnulerRecharge() {
-  //   console.log("motif"+ this.motifAnnulation)
-  //   if(this.motifAnnulation=='' && this.recharge.typeOperation=="Recharge")
-  //   return
-  //   var confirmation = { id: this.recharge.id, action: 'annulé' , motif: this.motifAnnulation}
-  //   this.clientService.AnnulerRecharge(confirmation).subscribe(
-  //     (res: any) => {
-  //       console.log(res.data.includes("Email non envoyé"), res.data)
-  //       if(res.data.includes("Email non envoyé"))
-  //         this.toasterService.pop("warning", "Annulation effectué avec succèss, Alert non envoyé")
-  //       else
-  //       this.toasterService.pop("success", "Annulation effectué avec succèss")
-  //       this.ListRechargeClient.find(x => x.id == this.recharge.id).statusValidation = 'annulé'
-  //       this.ListRechargeClient.find(x => x.id == this.recharge.id).motifAnnulation = this.motifAnnulation
-  //       this.AnnulerRechargeModal.hide()
-  //       this.AnnulerPaiementModal.hide()
-  //       this.motifAnnulation=''
-  //       console.log(res)
-  //     },
-  //     (err: any) => {
-  //       this.toasterService.pop("error", "une erreur est survenue");
-  //     }
-  //   )
-  // }
+ 
 
   selectdemande(item) {
 

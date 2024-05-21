@@ -68,6 +68,11 @@ export class DashboardService {
   SendlistRemise(): Observable<any> {
     return this.remiseUpdate.asObservable();
   }
+ 
+  senddemandePers(){
+    return this.http.get(`${environment.api_url}/api/Dashboard/senddemandePers`);
+  }
+
 
     transactionstat(){
       return this.http.get(`${environment.api_url}/api/Dashboard/transactionstatistic`);

@@ -27,7 +27,10 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fa fa-lock"></i></span>
                   </div>
-                  <input type="password" class="form-control" formControlName="password" placeholder="{{'LOGIN.PSWD'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                  <input  [type]="hide? 'password' : 'text'"  class="form-control" formControlName="password" placeholder="{{'LOGIN.PSWD'|translate}}" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                  <span class="input-group-text" (click)="togglePasswordVisibility()">
+                    <i class="fa fa-eye" [class.fa-eye-slash]="hide"></i>
+                </span>
                   <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required">{{'LOGIN.PSWDREQ'|translate}}</div>
                     <div *ngIf="f.password.errors.minlength">{{'LOGIN.PSWDERRUR'|translate}}</div>
