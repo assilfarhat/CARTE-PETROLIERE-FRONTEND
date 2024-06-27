@@ -98,6 +98,8 @@ accessModifReclamation: any;
     this.currentDate = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
     
     this.form = this.fb.group({
+      // dateStart: [this.params['dateStart'] == undefined ? this.currentDate : this.params['dateStart'], [Validators.required]],
+      // dateEnd: [this.params['dateEnd'] == undefined ? this.currentDate : this.params['dateEnd'], [Validators.required]],
       dateStart: [this.params['dateStart'] == undefined ? this.currentDate : this.params['dateStart'], [Validators.required]],
       dateEnd: [this.params['dateEnd'] == undefined ? this.currentDate : this.params['dateEnd'], [Validators.required]],
       IdClient: [this.params['IdClient'] == undefined ? '' : this.params['IdClient']],

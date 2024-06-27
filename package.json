@@ -60,6 +60,7 @@
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
     "jszip": "^3.2.2",
+    "leaflet": "^1.9.4",
     "moment": "2.20.1",
     "ng-multiselect-dropdown": "^0.3.4",
     "ng-select": "1.0.0-rc.3",

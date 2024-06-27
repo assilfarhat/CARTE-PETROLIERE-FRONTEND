@@ -18,6 +18,10 @@ export class CarteService {
   changerPlafondTemporaire(model) {
     return this.http.post(environment.api_url + '/api/Cartes/changerPlafondTemporaire', model);
   }
+  
+  toggleFidelityProgram(id: string): Observable<any> {
+    return this.http.get(environment.api_url + '/api/Cartes/ToggleProgFidalite/' + id);
+  }
 
   List(model) {
     return this.http.post(environment.api_url + '/api/Cartes/filtreCarte', model);

@@ -29,6 +29,9 @@ generateBonachat(numCarte: string): Observable<any> {
     return this.http.get(`${environment.api_url}/api/Remise/getbyid/${id}`);
  }
 
+converterpointbonus(id: string): Observable<any> {
+   return this.http.get(`${environment.api_url}/api/Fidalite/converterpointbonus/${id}`);
+}
  addRemise(remise: any): Observable<any> {
     return this.http.post(`${environment.api_url}/api/Remise/addRemise`, remise);
  }

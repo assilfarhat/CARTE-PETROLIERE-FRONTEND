@@ -13,6 +13,8 @@ import { Subject } from 'rxjs';
 import { CompareAmounts, CompareDates, } from 'app/shared/Validators';
 import { TokenService } from 'app/services/token.service';
 import { Console, log } from 'console';
+import { FidaliteComponent } from 'app/views/ProgramFidalite/fidalite/fidalite.component';
+import { ProgramFidaliteService } from 'app/services/program-fidalite.service';
 
 interface AccessView {
   idUser: string;
@@ -38,7 +40,8 @@ export class CarteListComponent implements OnInit {
   @ViewChild('TransfertPPModal') TransfertPPModal
   @ViewChild('TransfertPSModal') TransfertPSModal
   @ViewChild(DataTableDirective) dtElement: DataTableDirective;
-
+  @ViewChild('activateModalfidalite') activateModalfidalite;
+  @ViewChild('converterpointModal') converterpointModal;
 
   Rechrgeform: FormGroup;
   TransfertRechrgeform: FormGroup;
@@ -124,7 +127,8 @@ export class CarteListComponent implements OnInit {
   constructor(private tokenService: TokenService, private router: Router, private amountpipe: AmountPipe, private route: ActivatedRoute, private toasterService: ToasterService, private SoldeCarteService: SoldeCarteService,
     private fb: FormBuilder, private carteService: CarteService, private clientService: ClientService,
     private datePipe: DatePipe,
-    private tokensService: TokenService) {
+    private tokensService: TokenService,
+  private servicefidalte: ProgramFidaliteService) {
     //this.currentDate = this.datePipe.transform(this.currentDate, 'MM-dd-yyyy');
   }
 
@@ -135,7 +139,7 @@ export class CarteListComponent implements OnInit {
     this.accessView = this.tokenService.getAccess();
   
       this.access = JSON.parse(this.accessView).filter(item => item.idAccessView === 'Carte');
-      console.log("this.access",this.access)
+    //  console.log("this.access",this.access)
       this.activationCarte = this.access[0].action
       this.accessActivationCarte = this.access[0].valueAccessView
       this.ajout = this.access[1].action
@@ -157,9 +161,9 @@ export class CarteListComponent implements OnInit {
       this.modifCarte = this.access[9].action
       this.accessModifCarte = this.access[9].valueAccessView
       this.rechargeCarte = this.access[10].action
-      console.log(" this.rechargeCarte ", this.rechargeCarte )
+     // console.log(" this.rechargeCarte ", this.rechargeCarte )
       this.accessrechargeCarte = this.access[10].valueAccessView
-      console.log(" this.accessrechargeCarte ", this.accessrechargeCarte )
+     // console.log(" this.accessrechargeCarte ", this.accessrechargeCarte )
       this.replaceCarte = this.access[11].action
       this.accessReplaceCarte = this.access[11].valueAccessView
       this.renouvelerCarte = this.access[12].action
@@ -297,6 +301,63 @@ export class CarteListComponent implements OnInit {
   // ngOnChanges(changes: SimpleChanges) {
   //   console.log(changes);  }
 
+  converterpointbonus(): void{
+  
+    this.servicefidalte.converterpointbonus(this.selectedCarte.numCarte).subscribe(
+      response =>  {
+
+        var carte = this.carteList.find(x => x.numCarte == this.selectedCarte.numCarte)
+        console.log("converterpointbonus",response)
+          carte.pointBonus= 0;
+          carte.soldePP = response.solde ;
+         
+          this.toasterService.pop('success', '', "les points bonus sont convertis avec succès");
+          this.converterpointModal.hide();
+       
+       
+      },
+      (err) => {
+        this.toasterService.pop('error', '', 'une erreur est servenue');
+        this.converterpointModal.hide();
+      }
+    );
+  }
+  handleClick(item: any): void {
+    if (item.pointBonus >= 5000) {
+        this.converterpointModal.show();
+    } else {
+        // Optionally, log a message or show a notification that the action is not available
+        console.log('Not enough points bonus to convert.');
+        this.toasterService.pop('error', '', 'Not enough points bonus to convert.');
+     
+    }
+}
+
+  toggleFidelityProgram(): void {
+    this.carteService.toggleFidelityProgram(this.selectedCarte.numCarte).subscribe(
+      response =>  {
+
+        var carte = this.carteList.find(x => x.numCarte == this.selectedCarte.numCarte)
+        console.log("carte.progFidalite",carte.progFidalite)
+        if(carte.progFidalite == false){
+          carte.progFidalite = true
+          console.log("activation",carte.progFidalite)
+          this.toasterService.pop('success', '', "l'activation est effectué avec succès");
+          this.activateModalfidalite.hide();
+        }else{ 
+          carte.progFidalite = false
+          console.log("désactivation",carte.progFidalite)
+          this.toasterService.pop('success', '', "la désactivation est effectué avec succès");
+          this.activateModalfidalite.hide();
+        }
+       
+      },
+      (err) => {
+        this.toasterService.pop('error', '', 'une erreur est servenue');
+        this.activateModalfidalite.hide();
+      }
+    );
+  }
 
   selectCarteForTransfert(item) {
     this.selectedCarteToTransfert = item
@@ -363,7 +424,7 @@ export class CarteListComponent implements OnInit {
     this.clientService.GetClientsIdName().subscribe(
       res => {
         this.ClientList = res as []
-        //console.log("clienttt", this.ClientList)
+       // console.log("clienttt", this.ClientList)
       }
     )
   }
@@ -522,9 +583,9 @@ export class CarteListComponent implements OnInit {
 
        this.carteService.List(search)
         .subscribe((resp: any) => {
-          console.log("resp: " ,resp)
+        // console.log("list cards: " ,resp)
           this.carteList = resp as []
-          
+         
           this.dtTrigger.next();
           this.isLoading = false;
         },

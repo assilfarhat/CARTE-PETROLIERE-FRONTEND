@@ -242,9 +242,8 @@ fileChange(event: any) {
     }
       ,
       (err) => {
-        //console.log(err);
-
-        this.toasterService.pop('error', '', err)
+        console.log("error 2" ,err);
+         this.toasterService.pop('error', '', err)
       })
   }
 
@@ -404,8 +403,8 @@ fileChange(event: any) {
         // this.toasterService.pop("success", "Pas de dépassement DMA")
       },
       (err: any) => {
-      
-        this.toasterService.pop('error', '', err);
+        console.log("Vous possédez déjà un bon qui n'a pas encore été clôturé.")
+        this.toasterService.pop('error', "Vous possédez déjà un bon qui n'a pas encore été clôturé.");
         ;
     
         setTimeout(() => {

@@ -12,4 +12,54 @@
     border-radius: 0.25rem; /* Ensure the border-radius is consistent */
 }
 
+/* Style for the search bar container */
+.search-bar {
+    padding: 10px; /* Add padding for a better look */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    background-color: #fff; /* White background */
+    margin-left: 22px ; /* Center the search bar */
+  }
   
+  /* Style for the input element */
+  .search-bar .form-control {
+    width: 100%; /* Full width */
+    padding: 10px; /* Padding inside the input */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 16px; /* Increase font size */
+  }
+  
+  /* Style for the datalist options */
+  .search-bar datalist option {
+    padding: 5px; /* Padding for options */
+    font-size: 14px; /* Font size for options */
+  }
+  
+  /* Style for the form container */
+  .search-bar form {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Column direction */
+    gap: 10px; /* Gap between elements */
+  }
+  /* Adjusted CSS */
+  .map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 30px;
+   
+    
+  }
+  
+  .map-frame {
+    border: 2px solid black;
+    height: 100%;
+  }
+  
+  #map {
+    height: 100%;
+   
+  }

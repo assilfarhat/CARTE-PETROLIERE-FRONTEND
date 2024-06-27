@@ -1,10 +1,18 @@
 
 <section class="section dashboard bg-light">
   
-      <!-- Left side columns -->
-      
-        <div class="pagetitle" style="margin-top: 10px;">
-          <h1>Dashboard</h1>
+         <!-- Left side columns -->
+         <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="search-bar">
+              <form class="form-horizontal" [formGroup]="formSearch">
+                <input class="form-control" list="Client" placeholder="Client" formControlName="clientId">
+                <datalist id="Client">
+                  <option *ngFor="let item of ClientListDropdown" [value]="item.raisonSociale">{{item.raisonSociale}}</option>
+                </datalist>
+              </form>
+            </div>
+          </div>
         </div>
         <div class="row" style="margin: 10px;">
 
@@ -100,7 +108,23 @@
             </div>
 
           </div><!-- End Customers Card -->
-        
+          <!-- Reports -->
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Emplacements des stations Staroil</h5>
+                <div class="container-fluid " style=" height: 421.2px;margin-top: 10px;">
+                  <div class="map-container">
+                    <div class="map-frame" style="margin-top: 15px;">
+                      <div id="map" ></div> <!-- Make sure this is inside the.map-frame -->
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          
           <!-- Reports -->
           <div class="col-12">
             <div class="card">

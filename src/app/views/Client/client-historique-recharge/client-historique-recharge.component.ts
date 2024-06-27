@@ -83,7 +83,7 @@ export class ClientHistoriqueRechargeComponent implements OnInit {
    this.accessconfirmPS =this.access[1].valueAccessView
  
    if(this.ActualUser == 'ADMIN STAROIL'){
-    console.log("test");
+    //console.log("test");
     
     this.access = JSON.parse(this.accessView).filter(item => item.idAccessView === 'Annulation Recharge Confirmé');
 this.annulation = this.access[0].action
@@ -106,12 +106,12 @@ this.accessannulation = this.access[0].valueAccessView
     this.route.queryParams.subscribe((params) => {
       this.params = params
     });
-    console.log('params ', this.params['dateFin'] )
+    //console.log('params ', this.params['dateFin'] )
     
     const currentYear = new Date().getFullYear();
     const firstDayOfYear = new Date(currentYear, 0, 1); // Note: Months are 0-indexed in JavaScript
     this.dateString1 = this.datePipe.transform(firstDayOfYear, "yyyy-MM-dd");
-    console.log('dateString1 ', this.dateString1 )
+    //console.log('dateString1 ', this.dateString1 )
     this.dateString = this.datePipe.transform(new Date(), "yyyy-MM-dd")
     this.form = this.fb.group({
       clientId: [(this.withParameter ? this.idClient : (this.params['clientId'] == undefined ? '' : this.params['clientId']))],
@@ -236,7 +236,7 @@ this.AnnulerRechargeClientModal.show()
       res => {
         this.chargerDemandeReglementList1();
         this.recherageNonConfirme = res as []
-        console.log("this.recherageNonConfirme", this.recherageNonConfirme)
+       // console.log("this.recherageNonConfirme", this.recherageNonConfirme)
         this.AideDecisionModal.show()
       }
     )
@@ -282,18 +282,18 @@ this.AnnulerRechargeClientModal.show()
         // "reference":""
       }
     });
-    console.log("dateDebut",  this.form.value.dateDebut )
+   // console.log("dateDebut",  this.form.value.dateDebut )
     
     filtre.dateDebut = this.form.value.dateDebut.replace(/-/g, '') + '000000000' ? this.form.value.dateDebut.replace(/-/g, '') + '000000000' : null;
     filtre.dateFin = this.form.value.dateFin.replace(/-/g, '') + '235959999' ? this.form.value.dateFin.replace(/-/g, '') + '235959999' : null;
 
-    console.log("hhhhhhhhhhh", filtre);
+   // console.log("hhhhhhhhhhh", filtre);
 
     this.clientService.GetRechargeClient(filtre).subscribe(
       (res: any) => {
         this.ListRechargeClient = res
         this.typerecharge=this.ListRechargeClient.typeCompte
-        console.log("this.ListRechargeClient = res helooo", this.ListRechargeClient)
+       // console.log("this.ListRechargeClient = res helooo", this.ListRechargeClient)
         this.reinitialiser();
         this.dtTrigger.next();
       })
@@ -339,7 +339,7 @@ this.AnnulerRechargeClientModal.show()
     this.clientService.ConfirmerRecharge(confirmation).subscribe(
       (res: any) => {
 
-  console.log('testtt heko',res)
+     // console.log('confirmerRecharge : ',res)
 
         if (this.ListRechargeClient.find(x => x.id == this.recharge.id).montant < this.ListRechargeClient.find(x => x.id == this.recharge.id).montantRecharge) {
           this.toasterService.pop("success", "le montant de paiement est inférieur au montant de recharge ")
@@ -386,12 +386,13 @@ this.AnnulerRechargeClientModal.show()
         // setTimeout(() => {
         //   this.printContact("iDdIV")
         // }, 1000);
-console.log("ikkicfjffn",this.form);
+     //   console.log("ikkicfjffn",this.form);
 
         this.DisabledButton = false;
       },
       (err: any) => {
         this.DisabledButton = false;
+        console.log("error 3" ,err);
         this.toasterService.pop("error", err.error);
         this.AideDecisionModal.hide();
       }
@@ -403,6 +404,7 @@ console.log("ikkicfjffn",this.form);
     var confirmation = { id: this.recharge.id, action: 'confirmé' }
     this.clientService.confirmerPaiement(confirmation).subscribe(
       (res: any) => {
+       // console.log('confirmerPaiement : ',res)
         //this.toasterService.pop("success", "confirmation effectué avec succèss")
         this.ListRechargeClient.find(x => x.id == this.recharge.id).statusValidation = 'confirmé'
         this.ConfirmRechargeModal.hide()
@@ -422,6 +424,7 @@ console.log("ikkicfjffn",this.form);
         this.DisabledButton = false;
       },
       (err: any) => {
+        console.log("error 4" ,err);
         this.toasterService.pop("error", err.error);
         this.DisabledButton = false;
       }

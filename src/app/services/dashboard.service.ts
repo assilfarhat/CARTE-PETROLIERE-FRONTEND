@@ -78,11 +78,12 @@ export class DashboardService {
       return this.http.get(`${environment.api_url}/api/Dashboard/transactionstatistic`);
     }
 
-    cardscount(){
-      return this.http.get(`${environment.api_url}/api/Dashboard/countcards`);
+    cardscount(idClient: string){
+      
+      return this.http.get(environment.api_url+"/api/Dashboard/countcards/"+ idClient);
     }
 
-    rechagecount(){
-      return this.http.get(`${environment.api_url}/api/Dashboard/SendRechargesatstic`);
+    rechagecount(idClient: string){
+      return this.http.get(environment.api_url+"/api/Dashboard/SendRechargesatstic/"+ idClient);
     }
 }

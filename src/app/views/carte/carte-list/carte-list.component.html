@@ -195,7 +195,12 @@
                                 aria-hidden="true"></i> </th>
 
                                 
+                                <th> <i class="fa fa-credit-card" title="Activer/Bloquer/Fidalite carte"
 
+                                    aria-hidden="true"></i> </th>
+    
+                                    
+    
                         <!-- <th> <i class="fa fa-history" title="Historique des opération" aria-hidden="true"></i></th> -->
                        
                         <th  *ngIf=" telecharge === 'Télécharger' && acesstelecharge ==true">Fiche Suivi D'état</th>
@@ -225,6 +230,9 @@
 
                         <th>Plafond PS </th>
                         <th>Point Fidalité </th>
+                        <th> <i class="fa fa-ticket" title="Converter points"
+
+                            aria-hidden="true"></i> </th>
 
                     </tr>
 
@@ -390,6 +398,67 @@
 
                         </td>
 
+                        <td>
+                            <i class="fa fa-credit-card" title="Cliquer pour activer Fidalite de la  carte"
+
+                            (click)="selectCarte(item, 'activatefidalte'); activateModalfidalite.show() "
+
+                            style="color: red;font-size:15px"
+
+                            *ngIf="item.progFidalite=='0' || item.progFidalite=='NULL'  " aria-hidden="true" ></i>
+
+                            <i class="fa fa-credit-card" title=" Cliquer pour déactiver Fidalite de la  carte"
+
+                                style="color: green;font-size:15px"
+
+                                (click)="selectCarte(item, 'activatefidalte'); activateModalfidalite.show()"
+
+                                *ngIf="item.progFidalite=='1' " aria-hidden="true" ></i>
+
+                        </td>
+                   <div bsModal #activateModalfidalite="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+
+                        aria-hidden="true">
+                    
+                        <div class="modal-dialog modal-lg modal-success" role="document">
+                    
+                            <div class="modal-content">
+                    
+                                <div class="modal-header">
+                    
+                                    <h4   *ngIf="item.progFidalite=='1' " class="modal-title"> Cliquer pour désactiver Fidalite de la  carte</h4>
+                                    <h4   *ngIf="item.progFidalite=='0' || item.progFidalite=='NULL' " class="modal-title"> Cliquer pour activer Fidalite de la  carte</h4>
+                    
+                                    <button type="button" class="close" (click)="activateModalfidalite.hide()" aria-label="Close">
+                    
+                                        <span aria-hidden="true">&times;</span>
+                    
+                                    </button>
+                    
+                                </div>
+                    
+                                <div class="modal-body">
+                    
+                                    <p *ngIf="item.progFidalite=='1'" >Êtes-vous sûre de vouloir désactiver Fidalite de la  carte de {{selectedCarte?.nomPrenom}}</p>
+                                    <p  *ngIf="item.progFidalite=='0' || item.progFidalite=='NULL'"  >Êtes-vous sûre de vouloir activer Fidalite de la  carte de {{selectedCarte?.nomPrenom}}</p>
+                                 
+                                
+                                </div>
+                    
+                                <div class="modal-footer">
+                    
+                                    <button type="button" class="btn btn-secondary" (click)="activateModalfidalite.hide()">Annuler</button>
+                    
+                                    <button type="button" class="btn btn-success" (click)="toggleFidelityProgram()">Confirmer</button>
+                    
+                                </div>
+                    
+                            </div><!-- /.modal-content -->
+                    
+                        </div><!-- /.modal-dialog -->
+                      
+                    </div><!-- /.modal -->
+                    
                         <!-- download fiche suivi carte  -->
 
 
@@ -447,6 +516,58 @@
 
                         </td>
                         <td>{{item.pointBonus}}</td>
+
+                        <td>
+                            <i class="fa fa-ticket" title="Cliquer pour converter  les points bonus de la  carte"
+                            
+                            (click)="selectCarte(item, 'converterpoint'); handleClick(item)"
+
+                            
+
+
+                            style="font-size:15px" aria-hidden="true" ></i>
+                        </td>
+                       
+                   <div bsModal #converterpointModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+
+                        aria-hidden="true">
+                    
+                        <div class="modal-dialog modal-lg modal-success" role="document">
+                    
+                            <div class="modal-content">
+                    
+                                <div class="modal-header">
+                    
+                                    <h4   class="modal-title"> Cliquer pour converter les points bonus de la  carte</h4>
+                                  
+                                    <button type="button" class="close" (click)="converterpointModal.hide()" aria-label="Close">
+                    
+                                        <span aria-hidden="true">&times;</span>
+                    
+                                    </button>
+                    
+                                </div>
+                    
+                                <div class="modal-body">
+                    
+                                    <p  >Êtes-vous sûre de vouloir converter les points Bonus de la  carte de {{selectedCarte?.nomPrenom}}</p>
+                                  
+                                
+                                </div>
+                    
+                                <div class="modal-footer">
+                    
+                                    <button type="button" class="btn btn-secondary" (click)="converterpointModal.hide()">Annuler</button>
+                    
+                                    <button type="button" class="btn btn-success" (click)="  converterpointbonus()">Confirmer</button>
+                    
+                                </div>
+                    
+                            </div><!-- /.modal-content -->
+                    
+                        </div><!-- /.modal-dialog -->
+                      
+                    </div><!-- /.modal -->
 
                     </tr>
 
@@ -549,7 +670,6 @@
     </div><!-- /.modal-dialog -->
 
 </div><!-- /.modal -->
-
 
 
 <div bsModal #RenouvelmentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
