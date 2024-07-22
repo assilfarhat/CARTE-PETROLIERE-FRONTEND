@@ -51,7 +51,7 @@ export class AppHeaderComponent implements OnInit {
 
   ngOnInit() {
    // setTimeout(() => { this.ngOnInit() }, 1000 * 10);
-    this.http.get(environment.api_url + '/api/Account/Profile').subscribe(
+    this.http.get(environment.accountmanagement_url + '/api/Account/Profile').subscribe(
       (resp) => {
         this.user = resp;
 
@@ -67,7 +67,7 @@ export class AppHeaderComponent implements OnInit {
 
 //signalR
   private startHttpAllRequest = () => {
-    this.http.get(environment.api_url +'/api/Reclamation/GetAllFromSignalR')
+    this.http.get(environment.systemsupport_url +'/api/Reclamation/GetAllFromSignalR')
       .subscribe(res => {
         this.AllReclamation = res;
        // //console.log(res);
@@ -75,7 +75,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   private startHttpAllCerantRequest = () => {
-    this.http.get(environment.api_url +'/api/Reclamation/GetAllGerantFromSignalR')
+    this.http.get(environment.systemsupport_url +'/api/Reclamation/GetAllGerantFromSignalR')
       .subscribe(res => {
         this.AllGerantReclamation = res;
        // //console.log(res);
@@ -83,7 +83,7 @@ export class AppHeaderComponent implements OnInit {
   }
 
   private startHttpAllClientRequest = () => {
-    this.http.get(environment.api_url +'/api/Reclamation/GetAllClientFromSignalR')
+    this.http.get(environment.systemsupport_url +'/api/Reclamation/GetAllClientFromSignalR')
       .subscribe(res => {
         this.AllclientReclamation = res;
        // //console.log(res);

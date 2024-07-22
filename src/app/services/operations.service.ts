@@ -9,7 +9,7 @@ import { isNull } from 'util';
 export class OperationsService {
   constructor(private http: HttpClient) { }
   GetOperations(input: any) {
-    return this.http.post(environment.api_url + '/api/Operations/GetOperations', input);
+    return this.http.post(environment.systemsupport_url + '/api/Operations/GetOperations', input);
   }
 
 }

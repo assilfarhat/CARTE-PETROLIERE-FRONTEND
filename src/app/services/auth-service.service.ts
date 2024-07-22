@@ -15,7 +15,7 @@ export class AuthServiceService {
   constructor(private http: HttpClient, private tokenService: TokenService, private userService: UserService) { }
 
   authenticate(user: any): any {
-    return this.http.post(environment.api_url + '/api/Account/Login', user);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/Login', user);
   }
 
   public get currentUserValue(): Utilisateur {
@@ -35,16 +35,16 @@ export class AuthServiceService {
 
   }
   changePassword(params: any) {
-    return this.http.post(environment.api_url + '/api/Account/ChangePassword', params);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/ChangePassword', params);
   }
 
   forgotPassword(usernameOrMail: string) {
     const params = new URLSearchParams();
     params.set('userName', usernameOrMail)
-    return this.http.post(environment.api_url + '/api/Account/RecoverPassword?' + params.toString(), null);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/RecoverPassword?' + params.toString(), null);
   }
 
   getUserInfos() {
-    return this.http.get(environment.api_url + '/api/Account/Profile');
+    return this.http.get(environment.accountmanagement_url + '/api/Account/Profile');
   }
 }

@@ -11,7 +11,7 @@ export class ZoneGeographiqueService {
 
 
   get() {
-    return this.http.get(environment.api_url + '/api/ZoneGeographiques' );
+    return this.http.get(environment.accountmanagement_url + '/api/ZoneGeographiques' );
   }
 
 }

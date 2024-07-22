@@ -12,29 +12,29 @@ export class TpeService {
 
   getTpe(){
     
-    return this.http.get(environment.api_url + '/api/Tpes' );
+    return this.http.get(environment.stationmanagement_url + '/api/Tpes' );
   }
 
   geTpeDisponibleByStation(idStation){
     
-    return this.http.get(environment.api_url + '/api/Tpes/geTpeDisponibleByStation/' +idStation);
+    return this.http.get(environment.stationmanagement_url + '/api/Tpes/geTpeDisponibleByStation/' +idStation);
   }
 
   getTpeBySerial(id){
     
-    return this.http.get(environment.api_url + '/api/Tpes/' +id);
+    return this.http.get(environment.stationmanagement_url + '/api/Tpes/' +id);
   }
   addTpe(tpe:any){
-    return this.http.post(environment.api_url + '/api/Tpes',tpe);
+    return this.http.post(environment.stationmanagement_url + '/api/Tpes',tpe);
     
   }
 
   updateTpe(id:any,tpe:any){
-    return this.http.post(environment.api_url + '/api/Tpes/'+id,tpe);
+    return this.http.post(environment.stationmanagement_url + '/api/Tpes/'+id,tpe);
     
   }
   deleteTpe(id:any){
-    return this.http.post(environment.api_url + '/api/Tpes/DeleteGwTpe/'+id , null);
+    return this.http.post(environment.stationmanagement_url + '/api/Tpes/DeleteGwTpe/'+id , null);
 
     
   }

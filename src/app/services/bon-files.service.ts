@@ -10,10 +10,10 @@ export class BonFilesService {
   constructor(private http: HttpClient) { }
 
   get (model) {
-    return this.http.post(environment.api_url + '/api/BonDatas', model);
+    return this.http.post(environment.systemsupport_url + '/api/BonDatas', model);
   }
 
   getFileEtat(model){
-    return this.http.post(environment.api_url + '/api/BonDatas/GetFileEtat', model);
+    return this.http.post(environment.systemsupport_url + '/api/BonDatas/GetFileEtat', model);
   }
 }

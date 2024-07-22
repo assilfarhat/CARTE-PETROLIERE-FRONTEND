@@ -8,7 +8,7 @@ import { AuthServiceService } from './auth-service.service';
   providedIn: 'root'
 })
 export class NotificationHubService {
-  private notificationUrl = environment.api_url+"/notification";
+  private notificationUrl = environment.systemsupport_url+"/notification";
   private connection: signalR.HubConnection;
   connectionEstablished = new Subject<Boolean>();
   notifications = new Subject<Notification[]>();

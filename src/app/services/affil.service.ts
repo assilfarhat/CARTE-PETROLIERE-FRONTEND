@@ -12,27 +12,27 @@ export class AffilService {
   constructor(private http: HttpClient) { }
 
   add(model:any) {
-    return this.http.post(environment.api_url + '/api/Affilie',model);
+    return this.http.post(environment.stationmanagement_url + '/api/Affilie',model);
   }
 
   getAll() {
-    return this.http.get(environment.api_url + '/api/Get/Affilie');
+    return this.http.get(environment.stationmanagement_url + '/api/Get/Affilie');
   }
 
   getAffil(id){
-    return this.http.get(environment.api_url + '/api/Get/Affilie/'+`${id}`)
+    return this.http.get(environment.stationmanagement_url + '/api/Get/Affilie/'+`${id}`)
   }
   update(id,model){
-    return this.http.put(environment.api_url + '/api/Update/Affilie/'+ `${id}`, model);
+    return this.http.put(environment.stationmanagement_url + '/api/Update/Affilie/'+ `${id}`, model);
   }
 
   addService(model:any) {
     
-    return this.http.post(environment.api_url + '/api/Add/Service/Affilie',model)
+    return this.http.post(environment.stationmanagement_url + '/api/Add/Service/Affilie',model)
     
   }
 
   Activate(id){
-    return this.http.put(environment.api_url + '/api/Activate/Affilie/'+ `${id}`,null);
+    return this.http.put(environment.stationmanagement_url + '/api/Activate/Affilie/'+ `${id}`,null);
   }
 }

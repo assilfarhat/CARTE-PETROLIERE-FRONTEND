@@ -11,30 +11,30 @@ export class TerminauxService {
 
   getTerminaux(){
     
-    return this.http.get(environment.api_url + '/api/Terminals/GetTerminalAll' );
+    return this.http.get(environment.stationmanagement_url + '/api/Terminals/GetTerminalAll' );
   }
 
   addTerminal(terminal:any){
-    return this.http.post(environment.api_url + '/api/GwTerminalMerchants/PostGwTerminalMerchant',terminal);
+    return this.http.post(environment.stationmanagement_url + '/api/GwTerminalMerchants/PostGwTerminalMerchant',terminal);
     
   }
   ConfirmaddTerminal(terminal:any){
-    return this.http.post(environment.api_url + '/api/GwTerminalMerchants/confirm',terminal);
+    return this.http.post(environment.stationmanagement_url + '/api/GwTerminalMerchants/confirm',terminal);
     
   }
 
   updateTerminal(id:any,terminal:any){
-    return this.http.post(environment.api_url + '/api/GwTerminalMerchants/'+id,terminal);
+    return this.http.post(environment.stationmanagement_url + '/api/GwTerminalMerchants/'+id,terminal);
     
   }
 
   deleteTerminal(id:any){
-    return this.http.post(environment.api_url + '/api/GwTerminalMerchants/DeleteGwTerminalMerchant/'+id , null);
+    return this.http.post(environment.stationmanagement_url + '/api/GwTerminalMerchants/DeleteGwTerminalMerchant/'+id , null);
     
   }
 
   GetService(){
-    return this.http.get(environment.api_url + '/api/GwTerminalMerchants/AllGwService');
+    return this.http.get(environment.stationmanagement_url + '/api/GwTerminalMerchants/AllGwService');
     
   }
 }

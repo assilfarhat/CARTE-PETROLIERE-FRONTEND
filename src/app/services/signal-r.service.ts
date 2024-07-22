@@ -10,7 +10,7 @@ export class SignalRService {
 private hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder().configureLogging(signalR.LogLevel.None)
-      .withUrl(environment.api_url +'/Reclamation')
+      .withUrl(environment.systemsupport_url +'/Reclamation')
                             .build();
     this.hubConnection
       .start()

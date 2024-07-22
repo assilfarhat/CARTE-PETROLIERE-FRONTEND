@@ -10,30 +10,30 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   updatePassword(id:any,params:any){
-    return this.http.post(environment.api_url+'/api/Account/UpdatePassword/'+id,params);
+    return this.http.post(environment.accountmanagement_url+'/api/Account/UpdatePassword/'+id,params);
   }
 
   UpdatePasswordOnlogin(name:any,params:any){
-    return this.http.post(environment.api_url+'/api/Account/UpdatePasswordOnlogin/'+name,params);
+    return this.http.post(environment.accountmanagement_url+'/api/Account/UpdatePasswordOnlogin/'+name,params);
   }
   getListRoles() {
-    return this.http.get(environment.api_url + '/api/Account/Roles');
+    return this.http.get(environment.accountmanagement_url + '/api/Account/Roles');
   }
 
   getListOrgansitaion() {
-    return this.http.get(environment.api_url + '/api/Organizations');
+    return this.http.get(environment.accountmanagement_url + '/api/Organizations');
   }
 
   addUser(user: any): any {
-    return this.http.post(environment.api_url + '/api/Account/Register', user);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/Register', user);
   }
 
   // getAllUsers(id: any) {
-  //   return this.http.get(environment.api_url + '/api/Account/Users/' + id);
+  //   return this.http.get(environment.accountmanagement_url + '/api/Account/Users/' + id);
   // }
   getAllUsers(id: any, idClient: string | null = null) {
    
-    let url = `${environment.api_url}/api/Account/Users/${id}`;
+    let url = `${environment.accountmanagement_url}/api/Account/Users/${id}`;
     if (idClient !== null) {
       url += `/${idClient}`;
     }
@@ -41,15 +41,15 @@ export class UserService {
   }
 
   deleteUser(id: any) {
-    return this.http.post(environment.api_url + '/api/Account/delete/' + id, null);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/delete/' + id, null);
   }
 
   getSuperviseur() {
-    return this.http.get(environment.api_url + '/api/Account/Superviseur');
+    return this.http.get(environment.accountmanagement_url + '/api/Account/Superviseur');
   }
 
   getUserByRole(id:any){
-    return this.http.get(environment.api_url + '/api/Account/GetUserByRole/'+id);
+    return this.http.get(environment.accountmanagement_url + '/api/Account/GetUserByRole/'+id);
     
   }
   updateUser() {
@@ -58,34 +58,34 @@ export class UserService {
 
   activateUser(id: any) {
 
-    return this.http.post(environment.api_url + '/api/Account/Lockout?id=' + id, null);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/Lockout?id=' + id, null);
   }
 
   getPermissions(id: any) {
-    return this.http.get(environment.api_url + '/api/UserAccesses/' + id);
+    return this.http.get(environment.accountmanagement_url + '/api/UserAccesses/' + id);
   }
 
   changePermissions(userid: any, permissions) {
 
-    return this.http.post(environment.api_url + '/api/UserAccesses/' + userid, permissions);
+    return this.http.post(environment.accountmanagement_url + '/api/UserAccesses/' + userid, permissions);
 
   }
   recoverPassword(usernameOrMail: string) {
     const params = new URLSearchParams();
     params.set('userName', usernameOrMail)
-    return this.http.post(environment.api_url + '/api/Account/RecoverPassword?' + params.toString(), null);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/RecoverPassword?' + params.toString(), null);
   }
 
 
   changePassword(params: any) {
-    return this.http.post(environment.api_url + '/api/Account/ChangePassword', params);
+    return this.http.post(environment.accountmanagement_url + '/api/Account/ChangePassword', params);
   }
 
   updateProfile(user: any) {
-    return this.http.post(environment.api_url + '/api/Account/UpdateProfile', user)
+    return this.http.post(environment.accountmanagement_url + '/api/Account/UpdateProfile', user)
   }
 
   update(id: any, user: any) {
-    return this.http.post(environment.api_url + '/api/Account/UpdateUser/' + id, user)
+    return this.http.post(environment.accountmanagement_url + '/api/Account/UpdateUser/' + id, user)
   }
 }

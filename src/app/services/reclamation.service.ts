@@ -17,14 +17,14 @@ export class ReclamationService {
   getAllReclamations(model:any)
   {
     
-    return this.http.post<DataTablesResponse>(environment.api_url + '/api/Reclamation/Suivi',model);
+    return this.http.post<DataTablesResponse>(environment.systemsupport_url + '/api/Reclamation/Suivi',model);
     
   }
   update(id:any,user:any){
-    return this.http.post(environment.api_url+'/api/Reclamation/UpdateReclamation/'+id,user)
+    return this.http.post(environment.systemsupport_url+'/api/Reclamation/UpdateReclamation/'+id,user)
   }
 
   addReclamation(reclamation: any): any {
-    return this.http.post(environment.api_url + '/api/ReclamationClient/AddReclamation' , reclamation);
+    return this.http.post(environment.systemsupport_url + '/api/ReclamationClient/AddReclamation' , reclamation);
   }
 }

@@ -12,6 +12,6 @@ export class JourferieService {
 
 
   get() {
-    return this.http.get(environment.api_url + '/api/JourFeries' );
+    return this.http.get(environment.systemsupport_url + '/api/JourFeries' );
   }
 }

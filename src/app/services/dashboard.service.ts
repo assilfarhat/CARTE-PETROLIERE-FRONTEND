@@ -12,7 +12,7 @@ import { Remise } from 'app/Model/Remise';
 export class DashboardService {
   private hubConnection: signalR.HubConnection;
    connectionEstablished = new Subject<Boolean>();
-  private dashboardHubUrl = environment.api_url+"/dashboardHub";
+  private dashboardHubUrl = environment.customorservice_url+"/dashboardHub";
   private currentuser : Utilisateur;
   cardStatusUpdate = new Subject<{ activeCount: number, blockedCount: number }>();
   rechargeUpdate = new Subject<{ rechargeconfirme: number , rechargeannule : number}>();
@@ -70,20 +70,20 @@ export class DashboardService {
   }
  
   senddemandePers(){
-    return this.http.get(`${environment.api_url}/api/Dashboard/senddemandePers`);
+    return this.http.get(`${environment.customorservice_url}/api/Dashboard/senddemandePers`);
   }
 
 
     transactionstat(){
-      return this.http.get(`${environment.api_url}/api/Dashboard/transactionstatistic`);
+      return this.http.get(`${environment.customorservice_url}/api/Dashboard/transactionstatistic`);
     }
 
     cardscount(idClient: string){
       
-      return this.http.get(environment.api_url+"/api/Dashboard/countcards/"+ idClient);
+      return this.http.get(environment.customorservice_url+"/api/Dashboard/countcards/"+ idClient);
     }
 
     rechagecount(idClient: string){
-      return this.http.get(environment.api_url+"/api/Dashboard/SendRechargesatstic/"+ idClient);
+      return this.http.get(environment.customorservice_url+"/api/Dashboard/SendRechargesatstic/"+ idClient);
     }
 }

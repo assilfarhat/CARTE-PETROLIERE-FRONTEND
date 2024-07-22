@@ -5,9 +5,13 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 export const environment = {
   production: false,
-  api_url: 'http://localhost:57660',
+  //api_url: 'http://localhost:57660',
  //api_url: location.origin + '/Acil',
-  //api_url: 'http://localhost:5000',
+  api_gateway_url: 'http://localhost:6004',
+  accountmanagement_url: 'http://localhost:6004/accountmanagement',
+  stationmanagement_url: 'http://localhost:6004/stationmanagement',
+  systemsupport_url: 'http://localhost:6004/systemsupport',
+  customorservice_url: 'http://localhost:6004/customorservice',
   //api_url: 'https://213.150.169.94:3443/WSPortailStarOil',
   MaxRetraitAlimentation : 9999999999,
   MinRetraitAlimentation: 1000,

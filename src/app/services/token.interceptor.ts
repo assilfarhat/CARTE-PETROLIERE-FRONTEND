@@ -14,33 +14,38 @@ import { Router } from '@angular/router';
 export class TokenInterceptor implements HttpInterceptor {
   private token;
   private expiration;
-  constructor(private tokensService: TokenService, private router: Router) {
+  constructor(private tokensService: TokenService, private router: Router) {}
 
-  }
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const url = req.url;
 
-  intercept(req: HttpRequest<any>, next: HttpHandler):
-    Observable<HttpEvent<any>> {
-    const uri = req.url.replace(environment.api_url, '');
     this.token = this.tokensService.getToken();
     this.expiration = this.tokensService.getExpirationDate();
+
+    // Check token expiration
     if (new Date(this.expiration) < new Date() && this.expiration != null) {
       this.tokensService.clear();
       this.router.navigate(['/login']);
     }
 
-    if (uri.startsWith('/api') && req.method !== 'OPTIONS' && this.token != null) {
-
-
+    // Check if the URL matches any of the service URLs and the request is not an OPTIONS request
+    if (
+      (url.startsWith(environment.accountmanagement_url) ||
+      url.startsWith(environment.stationmanagement_url) ||
+      url.startsWith(environment.systemsupport_url) ||
+      url.startsWith(environment.customorservice_url)) &&
+      req.method !== 'OPTIONS' &&
+      this.token != null
+    ) {
       const request = req.clone({
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + this.token.access_token
         })
-
-
       });
-
       return next.handle(request);
     }
+
     return next.handle(req);
   }
 }
+

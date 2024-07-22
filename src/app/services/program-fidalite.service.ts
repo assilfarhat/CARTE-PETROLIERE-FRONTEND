@@ -11,37 +11,37 @@ export class ProgramFidaliteService {
   constructor(private http: HttpClient) { }
 
   applyRemise(amount: any): Observable<any> {
-   return this.http.get(`${environment.api_url}/api/Remise/applyRemise/${amount}`);
+   return this.http.get(`${environment.customorservice_url}/api/Remise/applyRemise/${amount}`);
 }
   calcPointBonus(model: any): Observable<any> {
-   return this.http.post(`${environment.api_url}/api/Fidalite/calcPointBonus`, model);
+   return this.http.post(`${environment.customorservice_url}/api/Fidalite/calcPointBonus`, model);
 }
 
 generateBonachat(numCarte: string): Observable<any> {
-   return this.http.get(`${environment.api_url}/api/Fidalite/GenerateBonachat/${numCarte}`);
+   return this.http.get(`${environment.customorservice_url}/api/Fidalite/GenerateBonachat/${numCarte}`);
 }
 
   getAllRemises(): Observable<any> {
-    return this.http.get(`${environment.api_url}/api/Remise/Getall`);
+    return this.http.get(`${environment.customorservice_url}/api/Remise/Getall`);
  }
 
  getRemiseById(id: number): Observable<any> {
-    return this.http.get(`${environment.api_url}/api/Remise/getbyid/${id}`);
+    return this.http.get(`${environment.customorservice_url}/api/Remise/getbyid/${id}`);
  }
 
 converterpointbonus(id: string): Observable<any> {
-   return this.http.get(`${environment.api_url}/api/Fidalite/converterpointbonus/${id}`);
+   return this.http.get(`${environment.customorservice_url}/api/Fidalite/converterpointbonus/${id}`);
 }
  addRemise(remise: any): Observable<any> {
-    return this.http.post(`${environment.api_url}/api/Remise/addRemise`, remise);
+    return this.http.post(`${environment.customorservice_url}/api/Remise/addRemise`, remise);
  }
 
  updateRemise(id: any, remise: any){
-    return this.http.put(environment.api_url +'/api/Remise/putremise/'+id, remise);
+    return this.http.put(environment.customorservice_url +'/api/Remise/putremise/'+id, remise);
  }
 
 
  deleteRemise(id: any) {
-   return this.http.delete(environment.api_url + '/api/Remise/delete/' + id);
+   return this.http.delete(environment.customorservice_url + '/api/Remise/delete/' + id);
  }
 }

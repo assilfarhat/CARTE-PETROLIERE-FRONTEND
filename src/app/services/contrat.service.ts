@@ -10,26 +10,26 @@ export class ContratService {
   constructor(private http: HttpClient) { }
 
   add(model:any) {
-    return this.http.post(environment.api_url + '/api/Contrat',model);
+    return this.http.post(environment.api_gateway_url + '/api/Contrat',model);
   }
 
   getAll() {
-    return this.http.get(environment.api_url + '/api/Contrat')
+    return this.http.get(environment.api_gateway_url + '/api/Contrat')
     // .pipe(
     //   map( (data: any) => data.listOfOrgan)
     // );
   }
   get(id) {
-    return this.http.get(environment.api_url + '/api/Get/Contrat/'+`${id}`)
+    return this.http.get(environment.api_gateway_url + '/api/Get/Contrat/'+`${id}`)
     // .pipe(
     //   map( (data: any) => data.listOfOrgan)
     // );
   }
  
   update(id,model){
-    return this.http.put(environment.api_url + '/api/Update/Contrat/'+ `${id}`, model);
+    return this.http.put(environment.api_gateway_url + '/api/Update/Contrat/'+ `${id}`, model);
   }
   getContratClient(id:any){
-    return this.http.get(environment.api_url + '/api/Client/Contrat/'+ `${id}`);
+    return this.http.get(environment.customorservice_url + '/api/Client/Contrat/'+ `${id}`);
   }
 }

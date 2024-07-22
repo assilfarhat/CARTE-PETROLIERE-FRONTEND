@@ -12,35 +12,35 @@ export class StationsService {
 
 
   List() {
-    return this.http.get(environment.api_url + '/api/stations');
+    return this.http.get(environment.stationmanagement_url + '/api/stations');
   }
   ActiveStation() {
-    return this.http.get(environment.api_url + '/api/stations/active');
+    return this.http.get(environment.stationmanagement_url + '/api/stations/active');
   }
   getAllStation
   () {
-    return this.http.get(environment.api_url + '/api/stations/AllStations');
+    return this.http.get(environment.stationmanagement_url + '/api/stations/AllStations');
   }
   
   Get(id: any) {
-    return this.http.get(environment.api_url + '/api/stations/'+id);
+    return this.http.get(environment.stationmanagement_url + '/api/stations/'+id);
   }
 
   Add(stations) {
-    return this.http.post(environment.api_url + '/api/stations', stations);
+    return this.http.post(environment.stationmanagement_url + '/api/stations', stations);
   }
   Edit(stations) {
-    return this.http.put(environment.api_url + '/api/stations/' + stations.idstations, stations);
+    return this.http.put(environment.stationmanagement_url + '/api/stations/' + stations.idstations, stations);
   }
   ConfirmeRecharge(model) {
-    return this.http.post(environment.api_url + '/api/stations/confirmeRecharge', model);
+    return this.http.post(environment.stationmanagement_url + '/api/stations/confirmeRecharge', model);
   }
   GetlistFamillestations() {
-    return this.http.get(environment.api_url + '/api/stations/familles');
+    return this.http.get(environment.stationmanagement_url + '/api/stations/familles');
   }
 
   GetStationsIdName() {
-    return this.http.get(environment.api_url + '/api/stations/GetStationsIdName');
+    return this.http.get(environment.stationmanagement_url + '/api/stations/GetStationsIdName');
   }
   
 

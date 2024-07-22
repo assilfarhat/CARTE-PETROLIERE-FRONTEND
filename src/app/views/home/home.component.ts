@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   }
 
   getUserInfos() {
-    this.http.get(environment.api_url + '/api/Account/Profile'  ).subscribe(
+    this.http.get(environment.accountmanagement_url + '/api/Account/Profile'  ).subscribe(
       (resp )=>{this.user=resp;
 
       }

@@ -10,34 +10,34 @@ export class AffilieService {
 constructor(private http: HttpClient) { }
   
 List() {
-  return this.http.get(environment.api_url + '/api/Affilies');
+  return this.http.get(environment.stationmanagement_url + '/api/Affilies');
 }
 ListAll() {
-  return this.http.get(environment.api_url + '/api/Affilies/AllData');
+  return this.http.get(environment.stationmanagement_url + '/api/Affilies/AllData');
 }
 
 add(model:any) {
-  return this.http.post(environment.api_url + '/api/Affilies',model);
+  return this.http.post(environment.stationmanagement_url + '/api/Affilies',model);
 }
 
 getAll() {
-  return this.http.get(environment.api_url + '/api/Get/Affilie');
+  return this.http.get(environment.stationmanagement_url + '/api/Get/Affilie');
 }
 
 getAffil(id){
-  return this.http.get(environment.api_url + '/api/Get/Affilie/'+`${id}`)
+  return this.http.get(environment.stationmanagement_url + '/api/Get/Affilie/'+`${id}`)
 }
 update(id,model){
-  return this.http.put(environment.api_url + '/api/Update/Affilie/'+ `${id}`, model);
+  return this.http.put(environment.stationmanagement_url + '/api/Update/Affilie/'+ `${id}`, model);
 }
 
 addService(model:any) {
   
-  return this.http.post(environment.api_url + '/api/Add/Service/Affilie',model)
+  return this.http.post(environment.stationmanagement_url + '/api/Add/Service/Affilie',model)
   
 }
 
 Activate(id){
-  return this.http.put(environment.api_url + '/api/Affilies/ActivateOrDesacitvate/'+ `${id}`,null);
+  return this.http.put(environment.stationmanagement_url + '/api/Affilies/ActivateOrDesacitvate/'+ `${id}`,null);
 }
 }

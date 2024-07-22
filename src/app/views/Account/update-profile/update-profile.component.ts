@@ -53,7 +53,7 @@ this.lang=this.tokenService.getLang();
   }
 
   getUserInfos() {
-    this.http.get(environment.api_url + '/api/Account/Profile'  ).subscribe(
+    this.http.get(environment.accountmanagement_url + '/api/Account/Profile'  ).subscribe(
       (resp:any )=>{this.user=resp;
         this.form.patchValue({
           firstName:this.user.firstName,
