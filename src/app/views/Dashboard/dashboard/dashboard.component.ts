@@ -264,7 +264,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       marker.bindPopup(`<b>${address}</b>`); // Bind the address to the marker
       marker.openPopup(); // Open the popup to show the address
     }).catch(error => {
-      console.error('Error fetching address:', error);
+      console.error('Error fetching address :', error);
     });
   }
   

@@ -160,10 +160,11 @@
                       <th scope="col">Montant Max</th>
                       <th scope="col">Taux Remise</th>
                       <th scope="col">Date Expiration</th>
-                      <th>
+                      <th scope="col">Statut</th>
+                      <!-- <th>
 
                         <i class="icon-trash"></i>
-                      </th>
+                      </th> -->
                     </tr>
                   </thead>
                   <tbody>
@@ -175,10 +176,16 @@
                        
                         <td><a  class="text-primary">{{ remise.tauxRemise }}</a></td>
                         <td><span class="badge bg-info">{{ remise.dateExpiration | dateSql}}</span></td>
-                        <td>
+                        <td><span class="badge badge-danger" *ngIf=" remise.expired == '0' "
+                          style="width: 120px;">Expiré</span>
+                      
+                        <span class="badge badge-success" *ngIf=" remise.expired == '1' "
+                          style="width: 120px;">Valable</span>
+                      </td>
+                        <!-- <td>
                           <i class="icon-trash" title="Supprimer" 
                             (click)="selectRemise(remise.idRemise); deleteModal.show()"></i>
-                        </td>
+                        </td> -->
                       </tr>
                     </ng-container>
                     <tr *ngIf="ListRemise.length === 0">

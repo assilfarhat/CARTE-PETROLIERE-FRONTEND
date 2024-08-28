@@ -26,13 +26,14 @@
                        <th>Montant Max</th>
                        <th>Montant Min</th>
                        <th>Date Expiration</th> 
+                       <th>Statut</th>
                        <th >
                         <i class="icon-pencil" aria-hidden="true"></i>
                       </th>
-                      <th>
+                      <!-- <th>
 
                         <i class="icon-trash"></i>
-                      </th>
+                      </th> -->
                        <!-- Add more columns as needed -->
                     </tr>
                    </thead>
@@ -43,14 +44,21 @@
                         <td>{{ remise.montantMax }}</td>
                         <td>{{ remise.montantMin }}</td>
                         <td>{{ remise.dateExpiration | dateSql}}</td>
+                        <td><span class="badge badge-danger" *ngIf=" remise.expired == true "
+                          style="width: 120px;">Expiré</span>
+                      
+                        <span class="badge badge-success" *ngIf=" remise.expired == false "
+                          style="width: 120px;">Valable</span>
+                      </td>
+
                         <td><i  class="icon-pencil" aria-hidden="true"
                           [routerLink]="['/remise/add', remise.idRemise]"></i>
                       </td>
-                      
+<!--                       
                       <td>
                         <i class="icon-trash" title="Supprimer" 
                           (click)="selectRemise(remise.idRemise); deleteModal.show()"></i>
-                      </td>
+                      </td> -->
                         <!-- Add more cells as needed -->
                       </tr>
                    </tbody>
